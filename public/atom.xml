@@ -1,16 +1,324 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
-  <link href="http://yoursite.com/atom.xml" rel="self"/>
-  <link href="http://yoursite.com/"/>
-  <updated>2013-08-16T19:26:56+02:00</updated>
-  <id>http://yoursite.com/</id>
+  <title><![CDATA[Ogrim.no]]></title>
+  <link href="http://ogrim.no/atom.xml" rel="self"/>
+  <link href="http://ogrim.no/"/>
+  <updated>2013-08-17T17:57:18+02:00</updated>
+  <id>http://ogrim.no/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[Aleksander Skj&aelig;veland Larsen]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Format double density floppy on Windows]]></title>
+    <link href="http://ogrim.no/2013/01/format-double-density-floppy-on-windows/"/>
+    <updated>2013-01-03T00:00:00+01:00</updated>
+    <id>http://ogrim.no/2013/01/format-double-density-floppy-on-windows</id>
+    <content type="html"><![CDATA[<p>Since I always forget, this is the command for formatting double density floppy disks on Windows:</p>
+
+<pre class="brush: bash; title: ; notranslate" title="">format A: /T:80 /N:9</pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Opening Spotify URIs in Spotify Linux Preview from Opera]]></title>
+    <link href="http://ogrim.no/2011/11/spotify-uri-linux/"/>
+    <updated>2011-11-16T00:00:00+01:00</updated>
+    <id>http://ogrim.no/2011/11/spotify-uri-linux</id>
+    <content type="html"><![CDATA[<p>Using Spotify Linux Preview, I want to open URIs to songs and playlist from Opera. This was not working, so here is how you fix it:</p>
+
+<p>Stick the following in a file:</p>
+
+<pre><code>#!/bin/sh
+spotify -u $@
+</code></pre>
+
+<p>Make it executable with <code>chmod +x</code></p>
+
+<p>Go to Opera preferences by pressing <code>Alt+P</code> or <code>Ctrl+F12</code>, then go to <code>Advanced</code>, <code>Programs</code>, press <code>Add</code>, in <code>Protocol</code>, enter <code>spotify</code> and put the path to the script in <code>Open with other application</code>. Now you can open all the playlists!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Recursive unzip in bash]]></title>
+    <link href="http://ogrim.no/2011/10/recursive-unzip-in-bash/"/>
+    <updated>2011-10-14T00:00:00+02:00</updated>
+    <id>http://ogrim.no/2011/10/recursive-unzip-in-bash</id>
+    <content type="html"><![CDATA[<p>There is a lot of data I need to extract from archives, nested deeply within a silly folder structure. Doing it manually is out of the question. I had to modify this script I found at the <a href="http://unix.stackexchange.com/questions/4367/extracting-nested-zip-files">Unix Stack Exchange</a> slightly, in order to make it run as I wanted. It will run until it doesn&#8217;t find more .zip archive files, <strong>as it deletes them after extraction</strong>.</p>
+
+<p>I put this into a file:</p>
+
+<pre><code>#!/bin/bash
+shopt -s globstar nullglob
+while set -- **/*.zip; [ $# -ge 1 ]
+do
+    for z
+    do
+        ( cd -- "$(dirname "$z")" &amp;&amp;
+            z=${z##*/} &amp;&amp;
+            unzip -- "$z" &amp;&amp;
+            rm -- "$z"
+        )
+    done
+done
+</code></pre>
+
+<p>then made it executable with <code>chmod +x</code> and stuck it on my path. Now I can easily unzip all the archive files recursively, from the folder where I call the script.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[E-MU 1820 in Debian]]></title>
+    <link href="http://ogrim.no/2011/08/e-mu-1820-in-debian/"/>
+    <updated>2011-08-28T00:00:00+02:00</updated>
+    <id>http://ogrim.no/2011/08/e-mu-1820-in-debian</id>
+    <content type="html"><![CDATA[<p>As I recently installed Debian on my main workstation, I wanted to make my beloved E-MU 1820 sound card work. The audio quality is much better than the integrated sound card on the motherboard, probably because of better digital-analog converters and more power to drive my headphones. The sound card did not work out of the box, so I had to start poking for data. We can get useful hardware information using lspci.</p>
+
+<pre><code>lspci -nn
+</code></pre>
+
+<p>This gave a lot of output, so I used grep to find my sound card.</p>
+
+<pre><code>lspci -nn | grep Creative&lt;/pre&gt;
+</code></pre>
+
+<p>gave the following:</p>
+
+<pre><code>01:09.0 Multimedia audio controller [0401]: Creative Labs SB Audigy [1102:0004] (rev 03)
+</code></pre>
+
+<p>Notice the <code>1102:0004</code>, which is the <code>PCI id</code>. Next I looked it up in Debians device database: <a href="http://wiki.debian.org/DeviceDatabase/PCI">http://wiki.debian.org/DeviceDatabase/PCI</a> Strangely it did not match completely, closest find in the database was <code>1102:7004</code>. The output led me to search for <code>debian 1102:0004</code>, which gave just what I needed: a handy guide to compile and install the driver from scratch. Follow the guide and be on your way: <a href="http://wiki.debian.org/snd-emu10k1">http://wiki.debian.org/snd-emu10k1</a> When using sudo, I have to qualify modprobe to <code>/sbin/modprobe</code>. If you are elevated by <code>su</code>, you can call modprobe directly.</p>
+
+<p>Upon completing the guide, I restarted my system and was able to get the sound working by poking around in the Alsa mixer. I had to select the correct hardware and output settings. To change the default card we can modify the <code>alsa.conf</code> or <code>alsa-base.conf</code> (depending on what you have present) in <code>/etc/modprobe.d/</code></p>
+
+<p>List your sound cards with:</p>
+
+<pre><code>cat /proc/asound/modules
+</code></pre>
+
+<p>Append <code>alsa.conf</code> or <code>alsa-base.conf</code> with:</p>
+
+<pre><code>options snd_emu10k1=0
+</code></pre>
+
+<p>After rebooting the system, the clock rate had reset from <code>44.1Khz</code> to <code>48Khz</code>. This made the sound distorted. To fix it, set the clock rate with the following command:</p>
+
+<pre><code>amixer -c 1 set 'Clock Internal Rate' 44100
+</code></pre>
+
+<p>Notice that <code>-c 1</code> corresponds to the sound card from <code>/proc/asound/modules</code>. Just add this command to <code>/etc/rc.local</code> to run it upon login. You must add the command before the <code>exit 0</code>, as that must be the last command in the file. This will ensure that the clock rate is set to <code>44.1Khz</code> every time you log in.</p>
+
+<p>Lastly, I want to mention a useful tool for poking around with the routing matrix: emutrix. In the end, I did not need this tool to playback audio. However, if you are doing recording, it seems very useful to work out the routing. There are detailed installation instructions here: <a href="http://code.google.com/p/emutrix/wiki/InstallGuide">http://code.google.com/p/emutrix/wiki/InstallGuide</a> Just make sure you check it out from the <code>svn-repo</code>, as the releases does not support multiple sound cards (which every motherboard has this these days (increasingly on graphics card too, through HDMI)).</p>
+
+<p><strong>Update 31th August</strong></p>
+
+<p>Using emutrix, I poked around a bit to fix output to my loudspeakers. Only headphones was working previously. Thanks to emutrix, it was very fast and simple to determine the routing, before writing the commands. I now have this in my <code>rc.local</code> as well:</p>
+
+<pre><code>amixer -c 1 sset 'Dock DAC1 Left' 'DSP 0'
+amixer -c 1 sset 'Dock DAC1 Right' 'DSP 1'
+amixer -c 1 sset 'Dock DAC2 Left' 'DSP 0'
+amixer -c 1 sset 'Dock DAC2 Right' 'DSP 1'
+amixer -c 1 sset 'Dock DAC3 Left' 'DSP 0'
+amixer -c 1 sset 'Dock DAC3 Right' 'DSP 1'
+amixer -c 1 sset 'Dock DAC4 Left' 'DSP 0'
+amixer -c 1 sset 'Dock DAC4 Right' 'DSP 1'
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Keepass and Ubuntu]]></title>
+    <link href="http://ogrim.no/2011/06/keepass-and-ubuntu/"/>
+    <updated>2011-06-12T00:00:00+02:00</updated>
+    <id>http://ogrim.no/2011/06/keepass-and-ubuntu</id>
+    <content type="html"><![CDATA[<p>Regarding my last recommendation for Ubuntu and Keepass, there is now a much simpler option: a <code>ppa-repository</code>. Installation now only requires 3 commands, and no fiddling with setting up a script to launch the .exe-file with mono.</p>
+
+<pre><code>sudo apt-add-repository ppa:jtaylor/keepass
+sudo apt-get update
+sudo apt-get install keepass2
+</code></pre>
+
+<p><code>Alt+F2</code>, <code>keepass2</code>, <code>Enter</code>, and be on your way. In my experience, this also much more stable than running Keepass with mono. This is quite old news and more accessible than my last post on the matter, as <a href="http://sourceforge.net/projects/keepass/forums/forum/329220/topic/4503818">this information</a> is linked to from the <a href="http://keepass.info/">main Keepass site</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[stumpwm and cmus (or any other terminal program)]]></title>
+    <link href="http://ogrim.no/2011/05/stumpwm-cmus/"/>
+    <updated>2011-05-10T00:00:00+02:00</updated>
+    <id>http://ogrim.no/2011/05/stumpwm-cmus</id>
+    <content type="html"><![CDATA[<p><strong>Update 2nd September 2011:</strong> It seems I forgot to write how to configure gnome-terminal to keep the original title. In <em>Profile Preferences</em> go to <em>Title and Command</em> and set <em>When terminal commands set their own titles</em> to <em>Prepend initial title</em>.</p>
+
+<p><a href="http://www.nongnu.org/stumpwm/">Stumpwm</a> is an excellent tiling window manager written entirely in Common Lisp. It is fully keyboard driven and hackable to the fullest. The wm is running in it&#8217;s own CLisp REPL, so you can connect with Slime+Emacs and hack directly. It is super easy to customize the wm, simply re-evaluate and you are good to go!</p>
+
+<p><a href="http://cmus.sourceforge.net/">cmus</a> is an equally awesome program I enjoy using, a very efficient music player that runs in a terminal emulator.
+<img src="http://ogrim.no/wp-content/uploads/cmus-2.3.0.png" alt="" title="cmus-2.3.0" width="660" height="436" class="aligncenter size-full wp-image-369" />
+I wanted to have a keybinding either bringing cmus in focus, or starting it if it isn&#8217;t running. As cmus is running in a terminal emulator, it wasn&#8217;t straight forward how to achieve this. I am using the Gnome Terminal, so this solution will have to be modified to work with other terminals. Of course, the code is added to the <code>.stumpwm</code> file, but you could also just evaluate it to try it out.</p>
+
+<pre><code>(defcommand cmus () ()&lt;br /&gt;
+  "Run or switch to CMus"&lt;br /&gt;
+  (run-or-raise "gnome-terminal -e cmus -t cmus"&lt;br /&gt;
+(:instance "gnome-terminal" :title "cmus")))
+</code></pre>
+
+<p>Now I just have to bind the command to an appropriate key</p>
+
+<pre><code>(define-key *root-map* (kbd "C-p") "cmus")
+</code></pre>
+
+<p>This works because I set the title of the terminal when I launch it. cmus changes the title based on what song is playing, so it will not work without doing this.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Stop Opera 11 hide URL parameters]]></title>
+    <link href="http://ogrim.no/2010/12/stop-opera-11-hide-url-parameters/"/>
+    <updated>2010-12-24T00:00:00+01:00</updated>
+    <id>http://ogrim.no/2010/12/stop-opera-11-hide-url-parameters</id>
+    <content type="html"><![CDATA[<p>I love the new version of the <a href="http://www.opera.com/">Opera</a> web browser. If my memory is correct (it sometimes is) I have been using Opera for about 8 years. They do like to change things up, innovate and think differently. This is often for the better, giving us new and exiting features, for instance the <a href="http://www.opera.com/browser/tutorials/video/speeddial/">Speed Dial</a>. They changed up a lot of things for version 11, but there is one change I did not like: hiding the URL parameters.</p>
+
+<p>I found a solution for this problem in the opera.beta newsgroup, and it is dead simple: enter <code>opera:config#UserPrefs|HideURLParameter</code> in the address bar, uncheck the highlighted field and press save in the bottom. Done. Now URLs will not be truncated in the address bar!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Suspend problem in Ubuntu 10.10 on ASUS N73JF (and others)]]></title>
+    <link href="http://ogrim.no/2010/12/suspend-problem-in-ubuntu-10-10-on-asus-n73jf-and-others/"/>
+    <updated>2010-12-05T00:00:00+01:00</updated>
+    <id>http://ogrim.no/2010/12/suspend-problem-in-ubuntu-10-10-on-asus-n73jf-and-others</id>
+    <content type="html"><![CDATA[<p><strong>Update 26th August 2011:</strong> <em>Solution tested and working with Debian Squeeze (my new main distro). A commenter reported it works on Mint, so I guess it works on most Debian-based distros. Another commenter had success on a Gigabyte motherboard, which is very interesting indeed.</em></p>
+
+<p>After 3.5 years I finally caved in and got a new laptop. Screen resolution, lagging editors and general sloppyness where the major factors for ditching the old one. I have been quite pleased with the quality on my ASUS eeePC 1015PE, so I decided to go for another ASUS computer. As I am to use this machine for development, I&#8217;d like to have a large screen; the old one left me frustrated at the lack of screen estate and the crappy resolution. I therefore got me a 17,3&#8243; ASUS N73JF, with enough power to last me just as long as the old one, I hope!</p>
+
+<p>Since the new laptop has a somewhat decent graphics card, I decided to let the Windows install it came with stay, to be used for games and the likes. I of course installed Ubuntu 10.10 64-bit right away after booting the laptop to Windows 7 to check it out. <strong>It took longer booting to the preinstalled Windows 7, than it took installing Ubuntu from scratch!</strong> In addition to this, the Windows install was defiled with crapware. No wonder people buy Macs. Enough rambling; over to the problem at hand.</p>
+
+<p>I did encounter a problem with getting the Suspend working in Ubuntu. After checking the fantastic ubuntuforums.org, I found people with similar issues. <a href="http://ubuntuforums.org/showthread.php?t=1444822">This thread</a> holds the answers, but it seems the fix is more technical than it should be. However it will probably get included in some patch in the future.</p>
+
+<p>At least for the N73JF, you need to create two files.</p>
+
+<pre><code>sudo touch /etc/pm/sleep.d/20_custom-ehci_hcd
+sudo touch /etc/pm/sleep.d/20_custom-xhci_hcd
+</code></pre>
+
+<p>To open a GUI editor like gedit, with root privileges, you can use the following command:</p>
+
+<pre><code>gksudo gedit
+</code></pre>
+
+<p>Keep in mind this is dangerous if you edit the wrong files, so only open the ones we created with the touch-command. If you want to open the file directly, you can append the path to the filename onto the gedit command like so:</p>
+
+<pre><code>gksudo gedit /etc/pm/sleep.d/20_custom-ehci_hcd
+</code></pre>
+
+<p>When you have opened the files in your favorite editor, we need to enter some scripts. In <code>20_custom-ehci-hcd</code> put in:</p>
+
+<pre><code>#!/bin/sh
+# File: "/etc/pm/sleep.d/20_custom-ehci_hcd".
+TMPLIST=/tmp/ehci-dev-list
+
+case "${1}" in
+        hibernate|suspend)
+    echo -n '' &amp;gt; $TMPLIST
+          for i in `ls /sys/bus/pci/drivers/ehci_hcd/ | egrep '[0-9a-z]+\:[0-9a-z]+\:.*$'`; do
+              # Unbind ehci_hcd for first device XXXX:XX:XX.X:
+               echo -n "$i" | tee /sys/bus/pci/drivers/ehci_hcd/unbind
+           echo "$i" &amp;gt;&amp;gt; $TMPLIST
+          done
+        ;;
+        resume|thaw)
+    for i in `cat $TMPLIST`; do
+              # Bind ehci_hcd for first device XXXX:XX:XX.X:
+              echo -n "$i" | tee /sys/bus/pci/drivers/ehci_hcd/bind
+    done
+    rm $TMPLIST
+        ;;
+esac
+</code></pre>
+
+<p>In <code>20\_custom-xhci\_hcd</code> put in:</p>
+
+<pre><code>#!/bin/sh
+# File: "/etc/pm/sleep.d/20_custom-xhci_hcd".
+TMPLIST=/tmp/xhci-dev-list
+
+case "${1}" in
+        hibernate|suspend)
+    echo -n '' &amp;gt; $TMPLIST
+          for i in `ls /sys/bus/pci/drivers/xhci_hcd/ | egrep '[0-9a-z]+\:[0-9a-z]+\:.*$'`; do
+              # Unbind ehci_hcd for first device XXXX:XX:XX.X:
+               echo -n "$i" | tee /sys/bus/pci/drivers/xhci_hcd/unbind
+           echo "$i" &amp;gt;&amp;gt; $TMPLIST
+          done
+        ;;
+        resume|thaw)
+    for i in `cat $TMPLIST`; do
+              # Bind ehci_hcd for first device XXXX:XX:XX.X:
+              echo -n "$i" | tee /sys/bus/pci/drivers/xhci_hcd/bind
+    done
+    rm $TMPLIST
+        ;;
+esac
+</code></pre>
+
+<p>Now you must make these files executable with these two commands:</p>
+
+<pre><code>chmod +x /etc/pm/sleep.d/20_custom-ehci_hcd
+chmod +x /etc/pm/sleep.d/20_custom-xhci_hcd
+</code></pre>
+
+<p>A user on the forum reported he didn&#8217;t need the extra file as proposed in the first solution. I did not test without this file, as it wasn&#8217;t working until I added the xhci-related file. I suggest you try the steps outlined here first, and attempt these last steps only if it doesn&#8217;t work.</p>
+
+<p>Make this file:</p>
+
+<pre><code>sudo touch /etc/pm/config.d/usb3-suspend-workaround
+</code></pre>
+
+<p>Open the file, and put this in:</p>
+
+<pre><code>#File: "/etc/pm/config.d/usb3-suspend-workaround".
+SUSPEND_MODULES="xhci"
+</code></pre>
+
+<p>He didn&#8217;t say if it needs to be executable, I&#8217;m assuming it should and that it couldn&#8217;t hurt:</p>
+
+<pre><code>chmod +x /etc/pm/config.d/usb3-suspend-workaround
+</code></pre>
+
+<p>I hope you get it working. You should also check out <a href="http://ubuntuforums.org/showthread.php?t=1444822">the source for this post</a>, as pointed out earlier. The forum might contain new information, after this is published.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Keepass and Ubuntu 10.10]]></title>
+    <link href="http://ogrim.no/2010/10/keepass-and-ubuntu-10-10/"/>
+    <updated>2010-10-14T00:00:00+02:00</updated>
+    <id>http://ogrim.no/2010/10/keepass-and-ubuntu-10-10</id>
+    <content type="html"><![CDATA[<p>There is a issue with KeePass in Ubuntu 10.10. As I had to fix this on several computers, I am posting the solution here. It was somewhat <a href="http://sourceforge.net/projects/keepass/forums/forum/329221/topic/3888372">inconvenient to track down</a>.</p>
+
+<p>Run this command in the terminal:</p>
+
+<pre><code>sudo apt-get install libmono-winforms2.0-cil libmono-system-runtime2.0-cil
+</code></pre>
+
+<p>Earlier you only needed to install the winforms package to run KeePass, but with Ubuntu 10.10 it seems you need the system-runtime as well.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Scotland Yard is a weighted graph]]></title>
+    <link href="http://ogrim.no/2010/09/scotland-yard-is-a-weighted-graph/"/>
+    <updated>2010-09-23T00:00:00+02:00</updated>
+    <id>http://ogrim.no/2010/09/scotland-yard-is-a-weighted-graph</id>
+    <content type="html"><![CDATA[<p><img src="http://ogrim.no/wp-content/uploads/scotland_yard_graph.jpg" alt="" title="scotland_yard_graph" width="500" height="750" class="alignnone size-full wp-image-323" /><br/>
+<em>Photo by my wife, <a href="http://matildesk%C3%A5r.no/">Matilde Skår</a></em></p>
+
+<p>This I noticed when playing Scotland Yard with some friends during the summer. I figured I could make a helper program to remember and predict moves, and try to find ways to solve the game when Mr. X reveals his position. The programming language I am working in is Prolog, as it is very simple to represent the nodes in the graph with little syntax. The fun will start when I start writing predicates to search in the graph.</p>
+]]></content>
+  </entry>
   
 </feed>

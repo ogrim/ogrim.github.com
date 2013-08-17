@@ -1,0 +1,295 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>E-MU 1820 in Debian - Ogrim.no</title>
+  <meta name="author" content="Aleksander Skj&aelig;veland Larsen">
+
+  
+  <meta name="description" content="As I recently installed Debian on my main workstation, I wanted to make my beloved E-MU 1820 sound card work. The audio quality is much better than &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://ogrim.no/2011/08/e-mu-1820-in-debian">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Ogrim.no" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Ogrim.no</a></h1>
+  
+    <h2>Programing, Hacking, and the likes</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:ogrim.no" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">E-MU 1820 in Debian</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-28T00:00:00+02:00" pubdate data-updated="true">Aug 28<span>th</span>, 2011</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>As I recently installed Debian on my main workstation, I wanted to make my beloved E-MU 1820 sound card work. The audio quality is much better than the integrated sound card on the motherboard, probably because of better digital-analog converters and more power to drive my headphones. The sound card did not work out of the box, so I had to start poking for data. We can get useful hardware information using lspci.</p>
+
+<pre><code>lspci -nn
+</code></pre>
+
+<p>This gave a lot of output, so I used grep to find my sound card.</p>
+
+<pre><code>lspci -nn | grep Creative&lt;/pre&gt;
+</code></pre>
+
+<p>gave the following:</p>
+
+<pre><code>01:09.0 Multimedia audio controller [0401]: Creative Labs SB Audigy [1102:0004] (rev 03)
+</code></pre>
+
+<p>Notice the <code>1102:0004</code>, which is the <code>PCI id</code>. Next I looked it up in Debians device database: <a href="http://wiki.debian.org/DeviceDatabase/PCI">http://wiki.debian.org/DeviceDatabase/PCI</a> Strangely it did not match completely, closest find in the database was <code>1102:7004</code>. The output led me to search for <code>debian 1102:0004</code>, which gave just what I needed: a handy guide to compile and install the driver from scratch. Follow the guide and be on your way: <a href="http://wiki.debian.org/snd-emu10k1">http://wiki.debian.org/snd-emu10k1</a> When using sudo, I have to qualify modprobe to <code>/sbin/modprobe</code>. If you are elevated by <code>su</code>, you can call modprobe directly.</p>
+
+<p>Upon completing the guide, I restarted my system and was able to get the sound working by poking around in the Alsa mixer. I had to select the correct hardware and output settings. To change the default card we can modify the <code>alsa.conf</code> or <code>alsa-base.conf</code> (depending on what you have present) in <code>/etc/modprobe.d/</code></p>
+
+<p>List your sound cards with:</p>
+
+<pre><code>cat /proc/asound/modules
+</code></pre>
+
+<p>Append <code>alsa.conf</code> or <code>alsa-base.conf</code> with:</p>
+
+<pre><code>options snd_emu10k1=0
+</code></pre>
+
+<p>After rebooting the system, the clock rate had reset from <code>44.1Khz</code> to <code>48Khz</code>. This made the sound distorted. To fix it, set the clock rate with the following command:</p>
+
+<pre><code>amixer -c 1 set 'Clock Internal Rate' 44100
+</code></pre>
+
+<p>Notice that <code>-c 1</code> corresponds to the sound card from <code>/proc/asound/modules</code>. Just add this command to <code>/etc/rc.local</code> to run it upon login. You must add the command before the <code>exit 0</code>, as that must be the last command in the file. This will ensure that the clock rate is set to <code>44.1Khz</code> every time you log in.</p>
+
+<p>Lastly, I want to mention a useful tool for poking around with the routing matrix: emutrix. In the end, I did not need this tool to playback audio. However, if you are doing recording, it seems very useful to work out the routing. There are detailed installation instructions here: <a href="http://code.google.com/p/emutrix/wiki/InstallGuide">http://code.google.com/p/emutrix/wiki/InstallGuide</a> Just make sure you check it out from the <code>svn-repo</code>, as the releases does not support multiple sound cards (which every motherboard has this these days (increasingly on graphics card too, through HDMI)).</p>
+
+<p><strong>Update 31th August</strong></p>
+
+<p>Using emutrix, I poked around a bit to fix output to my loudspeakers. Only headphones was working previously. Thanks to emutrix, it was very fast and simple to determine the routing, before writing the commands. I now have this in my <code>rc.local</code> as well:</p>
+
+<pre><code>amixer -c 1 sset 'Dock DAC1 Left' 'DSP 0'
+amixer -c 1 sset 'Dock DAC1 Right' 'DSP 1'
+amixer -c 1 sset 'Dock DAC2 Left' 'DSP 0'
+amixer -c 1 sset 'Dock DAC2 Right' 'DSP 1'
+amixer -c 1 sset 'Dock DAC3 Left' 'DSP 0'
+amixer -c 1 sset 'Dock DAC3 Right' 'DSP 1'
+amixer -c 1 sset 'Dock DAC4 Left' 'DSP 0'
+amixer -c 1 sset 'Dock DAC4 Right' 'DSP 1'
+</code></pre>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">ogrim</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-28T00:00:00+02:00" pubdate data-updated="true">Aug 28<span>th</span>, 2011</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2011/06/keepass-and-ubuntu/" title="Previous Post: Keepass and Ubuntu">&laquo; Keepass and Ubuntu</a>
+      
+      
+        <a class="basic-alignment right" href="/2011/10/recursive-unzip-in-bash/" title="Next Post: Recursive unzip in bash">Recursive unzip in bash &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/01/format-double-density-floppy-on-windows/">Format Double Density Floppy on Windows</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/11/spotify-uri-linux/">Opening Spotify URIs in Spotify Linux Preview From Opera</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/10/recursive-unzip-in-bash/">Recursive Unzip in Bash</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/08/e-mu-1820-in-debian/">E-MU 1820 in Debian</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/06/keepass-and-ubuntu/">Keepass and Ubuntu</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/ogrim">@ogrim</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'ogrim',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Aleksander Skj&aelig;veland Larsen -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'ogrim';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

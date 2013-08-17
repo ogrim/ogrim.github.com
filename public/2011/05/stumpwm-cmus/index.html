@@ -5,13 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Blog Archive - Ogrim.no</title>
+  <title>stumpwm and cmus (or any other terminal program) - Ogrim.no</title>
   <meta name="author" content="Aleksander Skj&aelig;veland Larsen">
 
   
-  <meta name="description" content="Blog Archive 2013 Format double density floppy on Windows
-Jan 03 2013 2011 Opening Spotify URIs in Spotify Linux Preview from Opera
-Nov 16 2011 &hellip;">
+  <meta name="description" content="Update 2nd September 2011: It seems I forgot to write how to configure gnome-terminal to keep the original title. In Profile Preferences go to Title &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +18,7 @@ Nov 16 2011 &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://ogrim.no/blog/archives">
+  <link rel="canonical" href="http://ogrim.no/2011/05/stumpwm-cmus">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Ogrim.no" type="application/atom+xml">
@@ -66,127 +64,99 @@ Nov 16 2011 &hellip;">
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Blog Archive</h1>
+    
+      <h1 class="entry-title">Stumpwm and Cmus (or Any Other Terminal Program)</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-05-10T00:00:00+02:00" pubdate data-updated="true">May 10<span>th</span>, 2011</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives">
 
 
+<div class="entry-content"><p><strong>Update 2nd September 2011:</strong> It seems I forgot to write how to configure gnome-terminal to keep the original title. In <em>Profile Preferences</em> go to <em>Title and Command</em> and set <em>When terminal commands set their own titles</em> to <em>Prepend initial title</em>.</p>
 
-  
-  <h2>2013</h2>
+<p><a href="http://www.nongnu.org/stumpwm/">Stumpwm</a> is an excellent tiling window manager written entirely in Common Lisp. It is fully keyboard driven and hackable to the fullest. The wm is running in it&#8217;s own CLisp REPL, so you can connect with Slime+Emacs and hack directly. It is super easy to customize the wm, simply re-evaluate and you are good to go!</p>
 
-<article>
-  
-<h1><a href="/2013/01/format-double-density-floppy-on-windows/">Format double density floppy on Windows</a></h1>
-<time datetime="2013-01-03T00:00:00+01:00" pubdate><span class='month'>Jan</span> <span class='day'>03</span> <span class='year'>2013</span></time>
+<p><a href="http://cmus.sourceforge.net/">cmus</a> is an equally awesome program I enjoy using, a very efficient music player that runs in a terminal emulator.
+<img src="http://ogrim.no/wp-content/uploads/cmus-2.3.0.png" alt="" title="cmus-2.3.0" width="660" height="436" class="aligncenter size-full wp-image-369" />
+I wanted to have a keybinding either bringing cmus in focus, or starting it if it isn&#8217;t running. As cmus is running in a terminal emulator, it wasn&#8217;t straight forward how to achieve this. I am using the Gnome Terminal, so this solution will have to be modified to work with other terminals. Of course, the code is added to the <code>.stumpwm</code> file, but you could also just evaluate it to try it out.</p>
 
+<pre><code>(defcommand cmus () ()&lt;br /&gt;
+  "Run or switch to CMus"&lt;br /&gt;
+  (run-or-raise "gnome-terminal -e cmus -t cmus"&lt;br /&gt;
+(:instance "gnome-terminal" :title "cmus")))
+</code></pre>
 
-</article>
+<p>Now I just have to bind the command to an appropriate key</p>
 
+<pre><code>(define-key *root-map* (kbd "C-p") "cmus")
+</code></pre>
 
-
-  
-  <h2>2011</h2>
-
-<article>
-  
-<h1><a href="/2011/11/spotify-uri-linux/">Opening Spotify URIs in Spotify Linux Preview from Opera</a></h1>
-<time datetime="2011-11-16T00:00:00+01:00" pubdate><span class='month'>Nov</span> <span class='day'>16</span> <span class='year'>2011</span></time>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/2011/10/recursive-unzip-in-bash/">Recursive unzip in bash</a></h1>
-<time datetime="2011-10-14T00:00:00+02:00" pubdate><span class='month'>Oct</span> <span class='day'>14</span> <span class='year'>2011</span></time>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/2011/08/e-mu-1820-in-debian/">E-MU 1820 in Debian</a></h1>
-<time datetime="2011-08-28T00:00:00+02:00" pubdate><span class='month'>Aug</span> <span class='day'>28</span> <span class='year'>2011</span></time>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/2011/06/keepass-and-ubuntu/">Keepass and Ubuntu</a></h1>
-<time datetime="2011-06-12T00:00:00+02:00" pubdate><span class='month'>Jun</span> <span class='day'>12</span> <span class='year'>2011</span></time>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/2011/05/stumpwm-cmus/">stumpwm and cmus (or any other terminal program)</a></h1>
-<time datetime="2011-05-10T00:00:00+02:00" pubdate><span class='month'>May</span> <span class='day'>10</span> <span class='year'>2011</span></time>
-
-
-</article>
-
-
-
-  
-  <h2>2010</h2>
-
-<article>
-  
-<h1><a href="/2010/12/stop-opera-11-hide-url-parameters/">Stop Opera 11 hide URL parameters</a></h1>
-<time datetime="2010-12-24T00:00:00+01:00" pubdate><span class='month'>Dec</span> <span class='day'>24</span> <span class='year'>2010</span></time>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/2010/12/suspend-problem-in-ubuntu-10-10-on-asus-n73jf-and-others/">Suspend problem in Ubuntu 10.10 on ASUS N73JF (and others)</a></h1>
-<time datetime="2010-12-05T00:00:00+01:00" pubdate><span class='month'>Dec</span> <span class='day'>05</span> <span class='year'>2010</span></time>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/2010/10/keepass-and-ubuntu-10-10/">Keepass and Ubuntu 10.10</a></h1>
-<time datetime="2010-10-14T00:00:00+02:00" pubdate><span class='month'>Oct</span> <span class='day'>14</span> <span class='year'>2010</span></time>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/2010/09/scotland-yard-is-a-weighted-graph/">Scotland Yard is a weighted graph</a></h1>
-<time datetime="2010-09-23T00:00:00+02:00" pubdate><span class='month'>Sep</span> <span class='day'>23</span> <span class='year'>2010</span></time>
-
-
-</article>
-
+<p>This works because I set the title of the terminal when I launch it. cmus changes the title based on what song is playing, so it will not work without doing this.</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">ogrim</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-05-10T00:00:00+02:00" pubdate data-updated="true">May 10<span>th</span>, 2011</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2010/12/stop-opera-11-hide-url-parameters/" title="Previous Post: Stop Opera 11 hide URL parameters">&laquo; Stop Opera 11 hide URL parameters</a>
+      
+      
+        <a class="basic-alignment right" href="/2011/06/keepass-and-ubuntu/" title="Next Post: Keepass and Ubuntu">Keepass and Ubuntu &raquo;</a>
+      
+    </p>
+  </footer>
 </article>
 
 </div>

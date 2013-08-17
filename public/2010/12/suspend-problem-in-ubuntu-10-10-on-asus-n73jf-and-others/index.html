@@ -1,0 +1,343 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Suspend problem in Ubuntu 10.10 on ASUS N73JF (and others) - Ogrim.no</title>
+  <meta name="author" content="Aleksander Skj&aelig;veland Larsen">
+
+  
+  <meta name="description" content="Update 26th August 2011: Solution tested and working with Debian Squeeze (my new main distro). A commenter reported it works on Mint, so I guess it &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://ogrim.no/2010/12/suspend-problem-in-ubuntu-10-10-on-asus-n73jf-and-others">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Ogrim.no" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Ogrim.no</a></h1>
+  
+    <h2>Programing, Hacking, and the likes</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:ogrim.no" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Suspend Problem in Ubuntu 10.10 on ASUS N73JF (and Others)</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-12-05T00:00:00+01:00" pubdate data-updated="true">Dec 5<span>th</span>, 2010</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><strong>Update 26th August 2011:</strong> <em>Solution tested and working with Debian Squeeze (my new main distro). A commenter reported it works on Mint, so I guess it works on most Debian-based distros. Another commenter had success on a Gigabyte motherboard, which is very interesting indeed.</em></p>
+
+<p>After 3.5 years I finally caved in and got a new laptop. Screen resolution, lagging editors and general sloppyness where the major factors for ditching the old one. I have been quite pleased with the quality on my ASUS eeePC 1015PE, so I decided to go for another ASUS computer. As I am to use this machine for development, I&#8217;d like to have a large screen; the old one left me frustrated at the lack of screen estate and the crappy resolution. I therefore got me a 17,3&#8243; ASUS N73JF, with enough power to last me just as long as the old one, I hope!</p>
+
+<p>Since the new laptop has a somewhat decent graphics card, I decided to let the Windows install it came with stay, to be used for games and the likes. I of course installed Ubuntu 10.10 64-bit right away after booting the laptop to Windows 7 to check it out. <strong>It took longer booting to the preinstalled Windows 7, than it took installing Ubuntu from scratch!</strong> In addition to this, the Windows install was defiled with crapware. No wonder people buy Macs. Enough rambling; over to the problem at hand.</p>
+
+<p>I did encounter a problem with getting the Suspend working in Ubuntu. After checking the fantastic ubuntuforums.org, I found people with similar issues. <a href="http://ubuntuforums.org/showthread.php?t=1444822">This thread</a> holds the answers, but it seems the fix is more technical than it should be. However it will probably get included in some patch in the future.</p>
+
+<p>At least for the N73JF, you need to create two files.</p>
+
+<pre><code>sudo touch /etc/pm/sleep.d/20_custom-ehci_hcd
+sudo touch /etc/pm/sleep.d/20_custom-xhci_hcd
+</code></pre>
+
+<p>To open a GUI editor like gedit, with root privileges, you can use the following command:</p>
+
+<pre><code>gksudo gedit
+</code></pre>
+
+<p>Keep in mind this is dangerous if you edit the wrong files, so only open the ones we created with the touch-command. If you want to open the file directly, you can append the path to the filename onto the gedit command like so:</p>
+
+<pre><code>gksudo gedit /etc/pm/sleep.d/20_custom-ehci_hcd
+</code></pre>
+
+<p>When you have opened the files in your favorite editor, we need to enter some scripts. In <code>20_custom-ehci-hcd</code> put in:</p>
+
+<pre><code>#!/bin/sh
+# File: "/etc/pm/sleep.d/20_custom-ehci_hcd".
+TMPLIST=/tmp/ehci-dev-list
+
+case "${1}" in
+        hibernate|suspend)
+    echo -n '' &amp;gt; $TMPLIST
+          for i in `ls /sys/bus/pci/drivers/ehci_hcd/ | egrep '[0-9a-z]+\:[0-9a-z]+\:.*$'`; do
+              # Unbind ehci_hcd for first device XXXX:XX:XX.X:
+               echo -n "$i" | tee /sys/bus/pci/drivers/ehci_hcd/unbind
+           echo "$i" &amp;gt;&amp;gt; $TMPLIST
+          done
+        ;;
+        resume|thaw)
+    for i in `cat $TMPLIST`; do
+              # Bind ehci_hcd for first device XXXX:XX:XX.X:
+              echo -n "$i" | tee /sys/bus/pci/drivers/ehci_hcd/bind
+    done
+    rm $TMPLIST
+        ;;
+esac
+</code></pre>
+
+<p>In <code>20\_custom-xhci\_hcd</code> put in:</p>
+
+<pre><code>#!/bin/sh
+# File: "/etc/pm/sleep.d/20_custom-xhci_hcd".
+TMPLIST=/tmp/xhci-dev-list
+
+case "${1}" in
+        hibernate|suspend)
+    echo -n '' &amp;gt; $TMPLIST
+          for i in `ls /sys/bus/pci/drivers/xhci_hcd/ | egrep '[0-9a-z]+\:[0-9a-z]+\:.*$'`; do
+              # Unbind ehci_hcd for first device XXXX:XX:XX.X:
+               echo -n "$i" | tee /sys/bus/pci/drivers/xhci_hcd/unbind
+           echo "$i" &amp;gt;&amp;gt; $TMPLIST
+          done
+        ;;
+        resume|thaw)
+    for i in `cat $TMPLIST`; do
+              # Bind ehci_hcd for first device XXXX:XX:XX.X:
+              echo -n "$i" | tee /sys/bus/pci/drivers/xhci_hcd/bind
+    done
+    rm $TMPLIST
+        ;;
+esac
+</code></pre>
+
+<p>Now you must make these files executable with these two commands:</p>
+
+<pre><code>chmod +x /etc/pm/sleep.d/20_custom-ehci_hcd
+chmod +x /etc/pm/sleep.d/20_custom-xhci_hcd
+</code></pre>
+
+<p>A user on the forum reported he didn&#8217;t need the extra file as proposed in the first solution. I did not test without this file, as it wasn&#8217;t working until I added the xhci-related file. I suggest you try the steps outlined here first, and attempt these last steps only if it doesn&#8217;t work.</p>
+
+<p>Make this file:</p>
+
+<pre><code>sudo touch /etc/pm/config.d/usb3-suspend-workaround
+</code></pre>
+
+<p>Open the file, and put this in:</p>
+
+<pre><code>#File: "/etc/pm/config.d/usb3-suspend-workaround".
+SUSPEND_MODULES="xhci"
+</code></pre>
+
+<p>He didn&#8217;t say if it needs to be executable, I&#8217;m assuming it should and that it couldn&#8217;t hurt:</p>
+
+<pre><code>chmod +x /etc/pm/config.d/usb3-suspend-workaround
+</code></pre>
+
+<p>I hope you get it working. You should also check out <a href="http://ubuntuforums.org/showthread.php?t=1444822">the source for this post</a>, as pointed out earlier. The forum might contain new information, after this is published.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">ogrim</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-12-05T00:00:00+01:00" pubdate data-updated="true">Dec 5<span>th</span>, 2010</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2010/10/keepass-and-ubuntu-10-10/" title="Previous Post: Keepass and Ubuntu 10.10">&laquo; Keepass and Ubuntu 10.10</a>
+      
+      
+        <a class="basic-alignment right" href="/2010/12/stop-opera-11-hide-url-parameters/" title="Next Post: Stop Opera 11 hide URL parameters">Stop Opera 11 hide URL parameters &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/01/format-double-density-floppy-on-windows/">Format Double Density Floppy on Windows</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/11/spotify-uri-linux/">Opening Spotify URIs in Spotify Linux Preview From Opera</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/10/recursive-unzip-in-bash/">Recursive Unzip in Bash</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/08/e-mu-1820-in-debian/">E-MU 1820 in Debian</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/06/keepass-and-ubuntu/">Keepass and Ubuntu</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/ogrim">@ogrim</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'ogrim',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Aleksander Skj&aelig;veland Larsen -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'ogrim';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
