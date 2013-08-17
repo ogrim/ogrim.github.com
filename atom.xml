@@ -1,139 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <title>Ogrim.no</title>
-  <meta name="author" content="Aleksander Skj&aelig;veland Larsen">
-
-  
-  <meta name="description" content="Since I always forget, this is the command for formatting double density floppy disks on Windows: format A: /T:80 /N:9 ">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="http://ogrim.no">
-  <link href="/favicon.ico" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="Ogrim.no" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
-  
-
-</head>
-
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Ogrim.no</a></h1>
-  
-    <h2>Programing, Hacking, and the likes</h2>
-  
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:ogrim.no" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
-  
-  
-  
-    <article>
-      
-  <header>
+  <title><![CDATA[Ogrim.no]]></title>
+  <link href="http://ogrim.no/atom.xml" rel="self"/>
+  <link href="http://ogrim.no/"/>
+  <updated>2013-08-17T18:20:22+02:00</updated>
+  <id>http://ogrim.no/</id>
+  <author>
+    <name><![CDATA[Aleksander Skj&aelig;veland Larsen]]></name>
     
-      <h1 class="entry-title"><a href="/2013/01/format-double-density-floppy-on-windows/">Format Double Density Floppy on Windows</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
 
   
-
-
-<time datetime="2013-01-03T00:00:00+01:00" pubdate data-updated="true">Jan 3<span>rd</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Since I always forget, this is the command for formatting double density floppy disks on Windows:</p>
+  <entry>
+    <title type="html"><![CDATA[Format double density floppy on Windows]]></title>
+    <link href="http://ogrim.no/2013/01/format-double-density-floppy-on-windows/"/>
+    <updated>2013-01-03T00:00:00+01:00</updated>
+    <id>http://ogrim.no/2013/01/format-double-density-floppy-on-windows</id>
+    <content type="html"><![CDATA[<p>Since I always forget, this is the command for formatting double density floppy disks on Windows:</p>
 
 <pre class="brush: bash; title: ; notranslate" title="">format A: /T:80 /N:9</pre>
 
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/11/spotify-uri-linux/">Opening Spotify URIs in Spotify Linux Preview From Opera</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-11-16T00:00:00+01:00" pubdate data-updated="true">Nov 16<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Using Spotify Linux Preview, I want to open URIs to songs and playlist from Opera. This was not working, so here is how you fix it:</p>
+  <entry>
+    <title type="html"><![CDATA[Opening Spotify URIs in Spotify Linux Preview from Opera]]></title>
+    <link href="http://ogrim.no/2011/11/spotify-uri-linux/"/>
+    <updated>2011-11-16T00:00:00+01:00</updated>
+    <id>http://ogrim.no/2011/11/spotify-uri-linux</id>
+    <content type="html"><![CDATA[<p>Using Spotify Linux Preview, I want to open URIs to songs and playlist from Opera. This was not working, so here is how you fix it:</p>
 
 <p>Stick the following in a file:</p>
 
@@ -144,42 +41,15 @@ spotify -u $@
 <p>Make it executable with <code>chmod +x</code></p>
 
 <p>Go to Opera preferences by pressing <code>Alt+P</code> or <code>Ctrl+F12</code>, then go to <code>Advanced</code>, <code>Programs</code>, press <code>Add</code>, in <code>Protocol</code>, enter <code>spotify</code> and put the path to the script in <code>Open with other application</code>. Now you can open all the playlists!</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/10/recursive-unzip-in-bash/">Recursive Unzip in Bash</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-10-14T00:00:00+02:00" pubdate data-updated="true">Oct 14<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>There is a lot of data I need to extract from archives, nested deeply within a silly folder structure. Doing it manually is out of the question. I had to modify this script I found at the <a href="http://unix.stackexchange.com/questions/4367/extracting-nested-zip-files">Unix Stack Exchange</a> slightly, in order to make it run as I wanted. It will run until it doesn&#8217;t find more .zip archive files, <strong>as it deletes them after extraction</strong>.</p>
+  <entry>
+    <title type="html"><![CDATA[Recursive unzip in bash]]></title>
+    <link href="http://ogrim.no/2011/10/recursive-unzip-in-bash/"/>
+    <updated>2011-10-14T00:00:00+02:00</updated>
+    <id>http://ogrim.no/2011/10/recursive-unzip-in-bash</id>
+    <content type="html"><![CDATA[<p>There is a lot of data I need to extract from archives, nested deeply within a silly folder structure. Doing it manually is out of the question. I had to modify this script I found at the <a href="http://unix.stackexchange.com/questions/4367/extracting-nested-zip-files">Unix Stack Exchange</a> slightly, in order to make it run as I wanted. It will run until it doesn&#8217;t find more .zip archive files, <strong>as it deletes them after extraction</strong>.</p>
 
 <p>I put this into a file:</p>
 
@@ -199,42 +69,15 @@ done
 </code></pre>
 
 <p>then made it executable with <code>chmod +x</code> and stuck it on my path. Now I can easily unzip all the archive files recursively, from the folder where I call the script.</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/08/e-mu-1820-in-debian/">E-MU 1820 in Debian</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-08-28T00:00:00+02:00" pubdate data-updated="true">Aug 28<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>As I recently installed Debian on my main workstation, I wanted to make my beloved E-MU 1820 sound card work. The audio quality is much better than the integrated sound card on the motherboard, probably because of better digital-analog converters and more power to drive my headphones. The sound card did not work out of the box, so I had to start poking for data. We can get useful hardware information using lspci.</p>
+  <entry>
+    <title type="html"><![CDATA[E-MU 1820 in Debian]]></title>
+    <link href="http://ogrim.no/2011/08/e-mu-1820-in-debian/"/>
+    <updated>2011-08-28T00:00:00+02:00</updated>
+    <id>http://ogrim.no/2011/08/e-mu-1820-in-debian</id>
+    <content type="html"><![CDATA[<p>As I recently installed Debian on my main workstation, I wanted to make my beloved E-MU 1820 sound card work. The audio quality is much better than the integrated sound card on the motherboard, probably because of better digital-analog converters and more power to drive my headphones. The sound card did not work out of the box, so I had to start poking for data. We can get useful hardware information using lspci.</p>
 
 <pre><code>lspci -nn
 </code></pre>
@@ -285,42 +128,15 @@ amixer -c 1 sset 'Dock DAC3 Right' 'DSP 1'
 amixer -c 1 sset 'Dock DAC4 Left' 'DSP 0'
 amixer -c 1 sset 'Dock DAC4 Right' 'DSP 1'
 </code></pre>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/06/keepass-and-ubuntu/">Keepass and Ubuntu</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-06-12T00:00:00+02:00" pubdate data-updated="true">Jun 12<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Regarding my last recommendation for Ubuntu and Keepass, there is now a much simpler option: a <code>ppa-repository</code>. Installation now only requires 3 commands, and no fiddling with setting up a script to launch the .exe-file with mono.</p>
+  <entry>
+    <title type="html"><![CDATA[Keepass and Ubuntu]]></title>
+    <link href="http://ogrim.no/2011/06/keepass-and-ubuntu/"/>
+    <updated>2011-06-12T00:00:00+02:00</updated>
+    <id>http://ogrim.no/2011/06/keepass-and-ubuntu</id>
+    <content type="html"><![CDATA[<p>Regarding my last recommendation for Ubuntu and Keepass, there is now a much simpler option: a <code>ppa-repository</code>. Installation now only requires 3 commands, and no fiddling with setting up a script to launch the .exe-file with mono.</p>
 
 <pre><code>sudo apt-add-repository ppa:jtaylor/keepass
 sudo apt-get update
@@ -328,48 +144,21 @@ sudo apt-get install keepass2
 </code></pre>
 
 <p><code>Alt+F2</code>, <code>keepass2</code>, <code>Enter</code>, and be on your way. In my experience, this also much more stable than running Keepass with mono. This is quite old news and more accessible than my last post on the matter, as <a href="http://sourceforge.net/projects/keepass/forums/forum/329220/topic/4503818">this information</a> is linked to from the <a href="http://keepass.info/">main Keepass site</a>.</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/05/stumpwm-cmus/">Stumpwm and Cmus (or Any Other Terminal Program)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-05-10T00:00:00+02:00" pubdate data-updated="true">May 10<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><strong>Update 2nd September 2011:</strong> It seems I forgot to write how to configure gnome-terminal to keep the original title. In <em>Profile Preferences</em> go to <em>Title and Command</em> and set <em>When terminal commands set their own titles</em> to <em>Prepend initial title</em>.</p>
+  <entry>
+    <title type="html"><![CDATA[stumpwm and cmus (or any other terminal program)]]></title>
+    <link href="http://ogrim.no/2011/05/stumpwm-cmus/"/>
+    <updated>2011-05-10T00:00:00+02:00</updated>
+    <id>http://ogrim.no/2011/05/stumpwm-cmus</id>
+    <content type="html"><![CDATA[<p><strong>Update 2nd September 2011:</strong> It seems I forgot to write how to configure gnome-terminal to keep the original title. In <em>Profile Preferences</em> go to <em>Title and Command</em> and set <em>When terminal commands set their own titles</em> to <em>Prepend initial title</em>.</p>
 
 <p><a href="http://www.nongnu.org/stumpwm/">Stumpwm</a> is an excellent tiling window manager written entirely in Common Lisp. It is fully keyboard driven and hackable to the fullest. The wm is running in it&#8217;s own CLisp REPL, so you can connect with Slime+Emacs and hack directly. It is super easy to customize the wm, simply re-evaluate and you are good to go!</p>
 
 <p><a href="http://cmus.sourceforge.net/">cmus</a> is an equally awesome program I enjoy using, a very efficient music player that runs in a terminal emulator.</p>
 
-<p><img src="/images/cmus-2.3.0.png" /></p>
+<p><img src="http://ogrim.no/images/cmus-2.3.0.png" /></p>
 
 <p>I wanted to have a keybinding either bringing cmus in focus, or starting it if it isn&#8217;t running. As cmus is running in a terminal emulator, it wasn&#8217;t straight forward how to achieve this. I am using the Gnome Terminal, so this solution will have to be modified to work with other terminals. Of course, the code is added to the <code>.stumpwm</code> file, but you could also just evaluate it to try it out.</p>
 
@@ -385,80 +174,26 @@ sudo apt-get install keepass2
 </code></pre>
 
 <p>This works because I set the title of the terminal when I launch it. cmus changes the title based on what song is playing, so it will not work without doing this.</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/12/stop-opera-11-hide-url-parameters/">Stop Opera 11 Hide URL Parameters</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-12-24T00:00:00+01:00" pubdate data-updated="true">Dec 24<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I love the new version of the <a href="http://www.opera.com/">Opera</a> web browser. If my memory is correct (it sometimes is) I have been using Opera for about 8 years. They do like to change things up, innovate and think differently. This is often for the better, giving us new and exiting features, for instance the <a href="http://www.opera.com/browser/tutorials/video/speeddial/">Speed Dial</a>. They changed up a lot of things for version 11, but there is one change I did not like: hiding the URL parameters.</p>
+  <entry>
+    <title type="html"><![CDATA[Stop Opera 11 hide URL parameters]]></title>
+    <link href="http://ogrim.no/2010/12/stop-opera-11-hide-url-parameters/"/>
+    <updated>2010-12-24T00:00:00+01:00</updated>
+    <id>http://ogrim.no/2010/12/stop-opera-11-hide-url-parameters</id>
+    <content type="html"><![CDATA[<p>I love the new version of the <a href="http://www.opera.com/">Opera</a> web browser. If my memory is correct (it sometimes is) I have been using Opera for about 8 years. They do like to change things up, innovate and think differently. This is often for the better, giving us new and exiting features, for instance the <a href="http://www.opera.com/browser/tutorials/video/speeddial/">Speed Dial</a>. They changed up a lot of things for version 11, but there is one change I did not like: hiding the URL parameters.</p>
 
 <p>I found a solution for this problem in the opera.beta newsgroup, and it is dead simple: enter <code>opera:config#UserPrefs|HideURLParameter</code> in the address bar, uncheck the highlighted field and press save in the bottom. Done. Now URLs will not be truncated in the address bar!</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/12/suspend-problem-in-ubuntu-10-10-on-asus-n73jf-and-others/">Suspend Problem in Ubuntu 10.10 on ASUS N73JF (and Others)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-12-05T00:00:00+01:00" pubdate data-updated="true">Dec 5<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><strong>Update 26th August 2011:</strong> <em>Solution tested and working with Debian Squeeze (my new main distro). A commenter reported it works on Mint, so I guess it works on most Debian-based distros. Another commenter had success on a Gigabyte motherboard, which is very interesting indeed.</em></p>
+  <entry>
+    <title type="html"><![CDATA[Suspend problem in Ubuntu 10.10 on ASUS N73JF (and others)]]></title>
+    <link href="http://ogrim.no/2010/12/suspend-problem-in-ubuntu-10-10-on-asus-n73jf-and-others/"/>
+    <updated>2010-12-05T00:00:00+01:00</updated>
+    <id>http://ogrim.no/2010/12/suspend-problem-in-ubuntu-10-10-on-asus-n73jf-and-others</id>
+    <content type="html"><![CDATA[<p><strong>Update 26th August 2011:</strong> <em>Solution tested and working with Debian Squeeze (my new main distro). A commenter reported it works on Mint, so I guess it works on most Debian-based distros. Another commenter had success on a Gigabyte motherboard, which is very interesting indeed.</em></p>
 
 <p>After 3.5 years I finally caved in and got a new laptop. Screen resolution, lagging editors and general sloppyness where the major factors for ditching the old one. I have been quite pleased with the quality on my ASUS eeePC 1015PE, so I decided to go for another ASUS computer. As I am to use this machine for development, I&#8217;d like to have a large screen; the old one left me frustrated at the lack of screen estate and the crappy resolution. I therefore got me a 17,3&#8243; ASUS N73JF, with enough power to last me just as long as the old one, I hope!</p>
 
@@ -557,42 +292,15 @@ SUSPEND_MODULES="xhci"
 </code></pre>
 
 <p>I hope you get it working. You should also check out <a href="http://ubuntuforums.org/showthread.php?t=1444822">the source for this post</a>, as pointed out earlier. The forum might contain new information, after this is published.</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/10/keepass-and-ubuntu-10-10/">Keepass and Ubuntu 10.10</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-10-14T00:00:00+02:00" pubdate data-updated="true">Oct 14<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>There is a issue with KeePass in Ubuntu 10.10. As I had to fix this on several computers, I am posting the solution here. It was somewhat <a href="http://sourceforge.net/projects/keepass/forums/forum/329221/topic/3888372">inconvenient to track down</a>.</p>
+  <entry>
+    <title type="html"><![CDATA[Keepass and Ubuntu 10.10]]></title>
+    <link href="http://ogrim.no/2010/10/keepass-and-ubuntu-10-10/"/>
+    <updated>2010-10-14T00:00:00+02:00</updated>
+    <id>http://ogrim.no/2010/10/keepass-and-ubuntu-10-10</id>
+    <content type="html"><![CDATA[<p>There is a issue with KeePass in Ubuntu 10.10. As I had to fix this on several computers, I am posting the solution here. It was somewhat <a href="http://sourceforge.net/projects/keepass/forums/forum/329221/topic/3888372">inconvenient to track down</a>.</p>
 
 <p>Run this command in the terminal:</p>
 
@@ -600,156 +308,20 @@ SUSPEND_MODULES="xhci"
 </code></pre>
 
 <p>Earlier you only needed to install the winforms package to run KeePass, but with Ubuntu 10.10 it seems you need the system-runtime as well.</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/09/scotland-yard-is-a-weighted-graph/">Scotland Yard Is a Weighted Graph</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-09-23T00:00:00+02:00" pubdate data-updated="true">Sep 23<span>rd</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="/images/scotland_yard_graph.jpg" /></p>
+  <entry>
+    <title type="html"><![CDATA[Scotland Yard is a weighted graph]]></title>
+    <link href="http://ogrim.no/2010/09/scotland-yard-is-a-weighted-graph/"/>
+    <updated>2010-09-23T00:00:00+02:00</updated>
+    <id>http://ogrim.no/2010/09/scotland-yard-is-a-weighted-graph</id>
+    <content type="html"><![CDATA[<p><img src="http://ogrim.no/images/scotland_yard_graph.jpg" /></p>
 
 <p><em>Photo by my wife, <a href="http://matildesk%C3%A5r.no/">Matilde Skår</a></em></p>
 
 <p>This I noticed when playing Scotland Yard with some friends during the summer. I figured I could make a helper program to remember and predict moves, and try to find ways to solve the game when Mr. X reveals his position. The programming language I am working in is Prolog, as it is very simple to represent the nodes in the graph with little syntax. The fun will start when I start writing predicates to search in the graph.</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
-<aside class="sidebar">
-  
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/2013/01/format-double-density-floppy-on-windows/">Format Double Density Floppy on Windows</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/11/spotify-uri-linux/">Opening Spotify URIs in Spotify Linux Preview From Opera</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/10/recursive-unzip-in-bash/">Recursive Unzip in Bash</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/e-mu-1820-in-debian/">E-MU 1820 in Debian</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/06/keepass-and-ubuntu/">Keepass and Ubuntu</a>
-      </li>
-    
-  </ul>
-</section>
-
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
-  </ul>
-  
-  <a href="https://github.com/ogrim">@ogrim</a> on GitHub
-  
-  <script type="text/javascript">
-    $(document).ready(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'ogrim',
-            count: 5,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-
-
-
-  
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Aleksander Skj&aelig;veland Larsen -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
-  
-
-<script type="text/javascript">
-      var disqus_shortname = 'ogrim';
-      
-        
-        var disqus_script = 'count.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
-
-
-
-
-
-
-
-
-
-
-
-</body>
-</html>
+</feed>
