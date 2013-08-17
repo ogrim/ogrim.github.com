@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Ogrim.no]]></title>
-  <link href="http://ogrim.github.io/atom.xml" rel="self"/>
-  <link href="http://ogrim.github.io/"/>
-  <updated>2013-08-18T00:29:37+02:00</updated>
-  <id>http://ogrim.github.io/</id>
+  <link href="http://ogrim.no/atom.xml" rel="self"/>
+  <link href="http://ogrim.no/"/>
+  <updated>2013-08-18T00:36:26+02:00</updated>
+  <id>http://ogrim.no/</id>
   <author>
     <name><![CDATA[Aleksander Skj&aelig;veland Larsen]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Format double density floppy on Windows]]></title>
-    <link href="http://ogrim.github.io/2013/01/format-double-density-floppy-on-windows/"/>
+    <link href="http://ogrim.no/2013/01/format-double-density-floppy-on-windows/"/>
     <updated>2013-01-03T00:00:00+01:00</updated>
-    <id>http://ogrim.github.io/2013/01/format-double-density-floppy-on-windows</id>
+    <id>http://ogrim.no/2013/01/format-double-density-floppy-on-windows</id>
     <content type="html"><![CDATA[<p>Since I always forget, this is the command for formatting double density floppy disks on Windows:</p>
 
 <pre class="brush: bash; title: ; notranslate" title="">format A: /T:80 /N:9</pre>
@@ -27,9 +27,9 @@
   
   <entry>
     <title type="html"><![CDATA[Opening Spotify URIs in Spotify Linux Preview from Opera]]></title>
-    <link href="http://ogrim.github.io/2011/11/spotify-uri-linux/"/>
+    <link href="http://ogrim.no/2011/11/spotify-uri-linux/"/>
     <updated>2011-11-16T00:00:00+01:00</updated>
-    <id>http://ogrim.github.io/2011/11/spotify-uri-linux</id>
+    <id>http://ogrim.no/2011/11/spotify-uri-linux</id>
     <content type="html"><![CDATA[<p>Using Spotify Linux Preview, I want to open URIs to songs and playlist from Opera. This was not working, so here is how you fix it:</p>
 
 <p>Stick the following in a file:</p>
@@ -46,9 +46,9 @@ spotify -u $@
   
   <entry>
     <title type="html"><![CDATA[Recursive unzip in bash]]></title>
-    <link href="http://ogrim.github.io/2011/10/recursive-unzip-in-bash/"/>
+    <link href="http://ogrim.no/2011/10/recursive-unzip-in-bash/"/>
     <updated>2011-10-14T00:00:00+02:00</updated>
-    <id>http://ogrim.github.io/2011/10/recursive-unzip-in-bash</id>
+    <id>http://ogrim.no/2011/10/recursive-unzip-in-bash</id>
     <content type="html"><![CDATA[<p>There is a lot of data I need to extract from archives, nested deeply within a silly folder structure. Doing it manually is out of the question. I had to modify this script I found at the <a href="http://unix.stackexchange.com/questions/4367/extracting-nested-zip-files">Unix Stack Exchange</a> slightly, in order to make it run as I wanted. It will run until it doesn&#8217;t find more .zip archive files, <strong>as it deletes them after extraction</strong>.</p>
 
 <p>I put this into a file:</p>
@@ -74,9 +74,9 @@ done
   
   <entry>
     <title type="html"><![CDATA[E-MU 1820 in Debian]]></title>
-    <link href="http://ogrim.github.io/2011/08/e-mu-1820-in-debian/"/>
+    <link href="http://ogrim.no/2011/08/e-mu-1820-in-debian/"/>
     <updated>2011-08-28T00:00:00+02:00</updated>
-    <id>http://ogrim.github.io/2011/08/e-mu-1820-in-debian</id>
+    <id>http://ogrim.no/2011/08/e-mu-1820-in-debian</id>
     <content type="html"><![CDATA[<p>As I recently installed Debian on my main workstation, I wanted to make my beloved E-MU 1820 sound card work. The audio quality is much better than the integrated sound card on the motherboard, probably because of better digital-analog converters and more power to drive my headphones. The sound card did not work out of the box, so I had to start poking for data. We can get useful hardware information using lspci.</p>
 
 <pre><code>lspci -nn
@@ -133,9 +133,9 @@ amixer -c 1 sset 'Dock DAC4 Right' 'DSP 1'
   
   <entry>
     <title type="html"><![CDATA[Keepass and Ubuntu]]></title>
-    <link href="http://ogrim.github.io/2011/06/keepass-and-ubuntu/"/>
+    <link href="http://ogrim.no/2011/06/keepass-and-ubuntu/"/>
     <updated>2011-06-12T00:00:00+02:00</updated>
-    <id>http://ogrim.github.io/2011/06/keepass-and-ubuntu</id>
+    <id>http://ogrim.no/2011/06/keepass-and-ubuntu</id>
     <content type="html"><![CDATA[<p>Regarding my last recommendation for Ubuntu and Keepass, there is now a much simpler option: a <code>ppa-repository</code>. Installation now only requires 3 commands, and no fiddling with setting up a script to launch the .exe-file with mono.</p>
 
 <pre><code>sudo apt-add-repository ppa:jtaylor/keepass
@@ -149,16 +149,16 @@ sudo apt-get install keepass2
   
   <entry>
     <title type="html"><![CDATA[stumpwm and cmus (or any other terminal program)]]></title>
-    <link href="http://ogrim.github.io/2011/05/stumpwm-cmus/"/>
+    <link href="http://ogrim.no/2011/05/stumpwm-cmus/"/>
     <updated>2011-05-10T00:00:00+02:00</updated>
-    <id>http://ogrim.github.io/2011/05/stumpwm-cmus</id>
+    <id>http://ogrim.no/2011/05/stumpwm-cmus</id>
     <content type="html"><![CDATA[<p><strong>Update 2nd September 2011:</strong> It seems I forgot to write how to configure gnome-terminal to keep the original title. In <em>Profile Preferences</em> go to <em>Title and Command</em> and set <em>When terminal commands set their own titles</em> to <em>Prepend initial title</em>.</p>
 
 <p><a href="http://www.nongnu.org/stumpwm/">Stumpwm</a> is an excellent tiling window manager written entirely in Common Lisp. It is fully keyboard driven and hackable to the fullest. The wm is running in it&#8217;s own CLisp REPL, so you can connect with Slime+Emacs and hack directly. It is super easy to customize the wm, simply re-evaluate and you are good to go!</p>
 
 <p><a href="http://cmus.sourceforge.net/">cmus</a> is an equally awesome program I enjoy using, a very efficient music player that runs in a terminal emulator.</p>
 
-<p><img src="http://ogrim.github.io/images/cmus-2.3.0.png" /></p>
+<p><img src="http://ogrim.no/images/cmus-2.3.0.png" /></p>
 
 <p>I wanted to have a keybinding either bringing cmus in focus, or starting it if it isn&#8217;t running. As cmus is running in a terminal emulator, it wasn&#8217;t straight forward how to achieve this. I am using the Gnome Terminal, so this solution will have to be modified to work with other terminals. Of course, the code is added to the <code>.stumpwm</code> file, but you could also just evaluate it to try it out.</p>
 
@@ -179,9 +179,9 @@ sudo apt-get install keepass2
   
   <entry>
     <title type="html"><![CDATA[Stop Opera 11 hide URL parameters]]></title>
-    <link href="http://ogrim.github.io/2010/12/stop-opera-11-hide-url-parameters/"/>
+    <link href="http://ogrim.no/2010/12/stop-opera-11-hide-url-parameters/"/>
     <updated>2010-12-24T00:00:00+01:00</updated>
-    <id>http://ogrim.github.io/2010/12/stop-opera-11-hide-url-parameters</id>
+    <id>http://ogrim.no/2010/12/stop-opera-11-hide-url-parameters</id>
     <content type="html"><![CDATA[<p>I love the new version of the <a href="http://www.opera.com/">Opera</a> web browser. If my memory is correct (it sometimes is) I have been using Opera for about 8 years. They do like to change things up, innovate and think differently. This is often for the better, giving us new and exiting features, for instance the <a href="http://www.opera.com/browser/tutorials/video/speeddial/">Speed Dial</a>. They changed up a lot of things for version 11, but there is one change I did not like: hiding the URL parameters.</p>
 
 <p>I found a solution for this problem in the opera.beta newsgroup, and it is dead simple: enter <code>opera:config#UserPrefs|HideURLParameter</code> in the address bar, uncheck the highlighted field and press save in the bottom. Done. Now URLs will not be truncated in the address bar!</p>
@@ -190,9 +190,9 @@ sudo apt-get install keepass2
   
   <entry>
     <title type="html"><![CDATA[Suspend problem in Ubuntu 10.10 on ASUS N73JF (and others)]]></title>
-    <link href="http://ogrim.github.io/2010/12/suspend-problem-in-ubuntu-10-10-on-asus-n73jf-and-others/"/>
+    <link href="http://ogrim.no/2010/12/suspend-problem-in-ubuntu-10-10-on-asus-n73jf-and-others/"/>
     <updated>2010-12-05T00:00:00+01:00</updated>
-    <id>http://ogrim.github.io/2010/12/suspend-problem-in-ubuntu-10-10-on-asus-n73jf-and-others</id>
+    <id>http://ogrim.no/2010/12/suspend-problem-in-ubuntu-10-10-on-asus-n73jf-and-others</id>
     <content type="html"><![CDATA[<p><strong>Update 26th August 2011:</strong> <em>Solution tested and working with Debian Squeeze (my new main distro). A commenter reported it works on Mint, so I guess it works on most Debian-based distros. Another commenter had success on a Gigabyte motherboard, which is very interesting indeed.</em></p>
 
 <p>After 3.5 years I finally caved in and got a new laptop. Screen resolution, lagging editors and general sloppyness where the major factors for ditching the old one. I have been quite pleased with the quality on my ASUS eeePC 1015PE, so I decided to go for another ASUS computer. As I am to use this machine for development, I&#8217;d like to have a large screen; the old one left me frustrated at the lack of screen estate and the crappy resolution. I therefore got me a 17,3&#8243; ASUS N73JF, with enough power to last me just as long as the old one, I hope!</p>
@@ -297,9 +297,9 @@ SUSPEND_MODULES="xhci"
   
   <entry>
     <title type="html"><![CDATA[Keepass and Ubuntu 10.10]]></title>
-    <link href="http://ogrim.github.io/2010/10/keepass-and-ubuntu-10-10/"/>
+    <link href="http://ogrim.no/2010/10/keepass-and-ubuntu-10-10/"/>
     <updated>2010-10-14T00:00:00+02:00</updated>
-    <id>http://ogrim.github.io/2010/10/keepass-and-ubuntu-10-10</id>
+    <id>http://ogrim.no/2010/10/keepass-and-ubuntu-10-10</id>
     <content type="html"><![CDATA[<p>There is a issue with KeePass in Ubuntu 10.10. As I had to fix this on several computers, I am posting the solution here. It was somewhat <a href="http://sourceforge.net/projects/keepass/forums/forum/329221/topic/3888372">inconvenient to track down</a>.</p>
 
 <p>Run this command in the terminal:</p>
@@ -313,10 +313,10 @@ SUSPEND_MODULES="xhci"
   
   <entry>
     <title type="html"><![CDATA[Scotland Yard is a weighted graph]]></title>
-    <link href="http://ogrim.github.io/2010/09/scotland-yard-is-a-weighted-graph/"/>
+    <link href="http://ogrim.no/2010/09/scotland-yard-is-a-weighted-graph/"/>
     <updated>2010-09-23T00:00:00+02:00</updated>
-    <id>http://ogrim.github.io/2010/09/scotland-yard-is-a-weighted-graph</id>
-    <content type="html"><![CDATA[<p><img src="http://ogrim.github.io/images/scotland_yard_graph.jpg" /></p>
+    <id>http://ogrim.no/2010/09/scotland-yard-is-a-weighted-graph</id>
+    <content type="html"><![CDATA[<p><img src="http://ogrim.no/images/scotland_yard_graph.jpg" /></p>
 
 <p><em>Photo by my wife, <a href="http://matildesk%C3%A5r.no/">Matilde Skår</a></em></p>
 
