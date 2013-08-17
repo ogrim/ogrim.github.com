@@ -19,7 +19,7 @@
 
   
   <link rel="canonical" href="http://ogrim.no/2011/05/stumpwm-cmus">
-  <link href="/favicon.png" rel="icon">
+  <link href="/favicon.ico" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Ogrim.no" type="application/atom+xml">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -86,8 +86,6 @@
 
 <time datetime="2011-05-10T00:00:00+02:00" pubdate data-updated="true">May 10<span>th</span>, 2011</time>
         
-         | <a href="#disqus_thread">Comments</a>
-        
       </p>
     
   </header>
@@ -97,9 +95,11 @@
 
 <p><a href="http://www.nongnu.org/stumpwm/">Stumpwm</a> is an excellent tiling window manager written entirely in Common Lisp. It is fully keyboard driven and hackable to the fullest. The wm is running in it&#8217;s own CLisp REPL, so you can connect with Slime+Emacs and hack directly. It is super easy to customize the wm, simply re-evaluate and you are good to go!</p>
 
-<p><a href="http://cmus.sourceforge.net/">cmus</a> is an equally awesome program I enjoy using, a very efficient music player that runs in a terminal emulator.
-<img src="http://ogrim.no/wp-content/uploads/cmus-2.3.0.png" alt="" title="cmus-2.3.0" width="660" height="436" class="aligncenter size-full wp-image-369" />
-I wanted to have a keybinding either bringing cmus in focus, or starting it if it isn&#8217;t running. As cmus is running in a terminal emulator, it wasn&#8217;t straight forward how to achieve this. I am using the Gnome Terminal, so this solution will have to be modified to work with other terminals. Of course, the code is added to the <code>.stumpwm</code> file, but you could also just evaluate it to try it out.</p>
+<p><a href="http://cmus.sourceforge.net/">cmus</a> is an equally awesome program I enjoy using, a very efficient music player that runs in a terminal emulator.</p>
+
+<p><img src="/images/cmus-2.3.0.png" /></p>
+
+<p>I wanted to have a keybinding either bringing cmus in focus, or starting it if it isn&#8217;t running. As cmus is running in a terminal emulator, it wasn&#8217;t straight forward how to achieve this. I am using the Gnome Terminal, so this solution will have to be modified to work with other terminals. Of course, the code is added to the <code>.stumpwm</code> file, but you could also just evaluate it to try it out.</p>
 
 <pre><code>(defcommand cmus () ()&lt;br /&gt;
   "Run or switch to CMus"&lt;br /&gt;

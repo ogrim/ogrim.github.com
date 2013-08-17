@@ -4,7 +4,7 @@
   <title><![CDATA[Ogrim.no]]></title>
   <link href="http://ogrim.no/atom.xml" rel="self"/>
   <link href="http://ogrim.no/"/>
-  <updated>2013-08-17T17:57:18+02:00</updated>
+  <updated>2013-08-17T18:20:22+02:00</updated>
   <id>http://ogrim.no/</id>
   <author>
     <name><![CDATA[Aleksander Skj&aelig;veland Larsen]]></name>
@@ -156,9 +156,11 @@ sudo apt-get install keepass2
 
 <p><a href="http://www.nongnu.org/stumpwm/">Stumpwm</a> is an excellent tiling window manager written entirely in Common Lisp. It is fully keyboard driven and hackable to the fullest. The wm is running in it&#8217;s own CLisp REPL, so you can connect with Slime+Emacs and hack directly. It is super easy to customize the wm, simply re-evaluate and you are good to go!</p>
 
-<p><a href="http://cmus.sourceforge.net/">cmus</a> is an equally awesome program I enjoy using, a very efficient music player that runs in a terminal emulator.
-<img src="http://ogrim.no/wp-content/uploads/cmus-2.3.0.png" alt="" title="cmus-2.3.0" width="660" height="436" class="aligncenter size-full wp-image-369" />
-I wanted to have a keybinding either bringing cmus in focus, or starting it if it isn&#8217;t running. As cmus is running in a terminal emulator, it wasn&#8217;t straight forward how to achieve this. I am using the Gnome Terminal, so this solution will have to be modified to work with other terminals. Of course, the code is added to the <code>.stumpwm</code> file, but you could also just evaluate it to try it out.</p>
+<p><a href="http://cmus.sourceforge.net/">cmus</a> is an equally awesome program I enjoy using, a very efficient music player that runs in a terminal emulator.</p>
+
+<p><img src="http://ogrim.no/images/cmus-2.3.0.png" /></p>
+
+<p>I wanted to have a keybinding either bringing cmus in focus, or starting it if it isn&#8217;t running. As cmus is running in a terminal emulator, it wasn&#8217;t straight forward how to achieve this. I am using the Gnome Terminal, so this solution will have to be modified to work with other terminals. Of course, the code is added to the <code>.stumpwm</code> file, but you could also just evaluate it to try it out.</p>
 
 <pre><code>(defcommand cmus () ()&lt;br /&gt;
   "Run or switch to CMus"&lt;br /&gt;
@@ -314,8 +316,9 @@ SUSPEND_MODULES="xhci"
     <link href="http://ogrim.no/2010/09/scotland-yard-is-a-weighted-graph/"/>
     <updated>2010-09-23T00:00:00+02:00</updated>
     <id>http://ogrim.no/2010/09/scotland-yard-is-a-weighted-graph</id>
-    <content type="html"><![CDATA[<p><img src="http://ogrim.no/wp-content/uploads/scotland_yard_graph.jpg" alt="" title="scotland_yard_graph" width="500" height="750" class="alignnone size-full wp-image-323" /><br/>
-<em>Photo by my wife, <a href="http://matildesk%C3%A5r.no/">Matilde Skår</a></em></p>
+    <content type="html"><![CDATA[<p><img src="http://ogrim.no/images/scotland_yard_graph.jpg" /></p>
+
+<p><em>Photo by my wife, <a href="http://matildesk%C3%A5r.no/">Matilde Skår</a></em></p>
 
 <p>This I noticed when playing Scotland Yard with some friends during the summer. I figured I could make a helper program to remember and predict moves, and try to find ways to solve the game when Mr. X reveals his position. The programming language I am working in is Prolog, as it is very simple to represent the nodes in the graph with little syntax. The fun will start when I start writing predicates to search in the graph.</p>
 ]]></content>
