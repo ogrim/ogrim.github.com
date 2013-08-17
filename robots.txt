@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://ogrim.github.io/sitemap.xml 
+Sitemap: http://ogrim.no/sitemap.xml 
