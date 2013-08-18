@@ -3,6 +3,7 @@ title: Scotland Yard is a weighted graph
 author: ogrim
 layout: post
 permalink: /2010/09/scotland-yard-is-a-weighted-graph/
+comments: true
 ---
 <img src="{{ root_url }}/images/scotland_yard_graph.jpg" />
 

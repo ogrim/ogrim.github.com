@@ -97,9 +97,12 @@
 
 <p>Stick the following in a file:</p>
 
-<pre><code>#!/bin/sh
-spotify -u $@
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/sh</span>
+</span><span class='line'>spotify -u <span class="nv">$@</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Make it executable with <code>chmod +x</code></p>
 
@@ -149,6 +152,12 @@ spotify -u $@
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -232,7 +241,10 @@ spotify -u $@
       var disqus_shortname = 'ogrim';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://ogrim.no/2011/11/spotify-uri-linux/';
+        var disqus_url = 'http://ogrim.no/2011/11/spotify-uri-linux/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

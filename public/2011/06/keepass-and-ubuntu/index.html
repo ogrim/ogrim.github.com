@@ -95,10 +95,14 @@
 
 <div class="entry-content"><p>Regarding my last recommendation for Ubuntu and Keepass, there is now a much simpler option: a <code>ppa-repository</code>. Installation now only requires 3 commands, and no fiddling with setting up a script to launch the .exe-file with mono.</p>
 
-<pre><code>sudo apt-add-repository ppa:jtaylor/keepass
-sudo apt-get update
-sudo apt-get install keepass2
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-add-repository ppa:jtaylor/keepass
+</span><span class='line'>sudo apt-get update
+</span><span class='line'>sudo apt-get install keepass2
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p><code>Alt+F2</code>, <code>keepass2</code>, <code>Enter</code>, and be on your way. In my experience, this also much more stable than running Keepass with mono. This is quite old news and more accessible than my last post on the matter, as <a href="http://sourceforge.net/projects/keepass/forums/forum/329220/topic/4503818">this information</a> is linked to from the <a href="http://keepass.info/">main Keepass site</a>.</p>
 </div>
@@ -146,6 +150,12 @@ sudo apt-get install keepass2
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -229,7 +239,10 @@ sudo apt-get install keepass2
       var disqus_shortname = 'ogrim';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://ogrim.no/2011/06/keepass-and-ubuntu/';
+        var disqus_url = 'http://ogrim.no/2011/06/keepass-and-ubuntu/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

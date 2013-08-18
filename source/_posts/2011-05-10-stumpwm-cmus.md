@@ -3,6 +3,7 @@ title: stumpwm and cmus (or any other terminal program)
 author: ogrim
 layout: post
 permalink: /2011/05/stumpwm-cmus/
+comments: true
 ---
 **Update 2nd September 2011:** It seems I forgot to write how to configure gnome-terminal to keep the original title. In *Profile Preferences* go to *Title and Command* and set *When terminal commands set their own titles* to *Prepend initial title*.
 
@@ -14,14 +15,18 @@ permalink: /2011/05/stumpwm-cmus/
 
 I wanted to have a keybinding either bringing cmus in focus, or starting it if it isn&#8217;t running. As cmus is running in a terminal emulator, it wasn&#8217;t straight forward how to achieve this. I am using the Gnome Terminal, so this solution will have to be modified to work with other terminals. Of course, the code is added to the `.stumpwm` file, but you could also just evaluate it to try it out.
 
-	(defcommand cmus () ()<br />
-	  "Run or switch to CMus"<br />
-	  (run-or-raise "gnome-terminal -e cmus -t cmus"<br />
-	(:instance "gnome-terminal" :title "cmus")))
+``` common-lisp
+(defcommand cmus () ()
+  "Run or switch to CMus"
+  (run-or-raise "gnome-terminal -e cmus -t cmus"
+(:instance "gnome-terminal" :title "cmus")))
+```
 
 Now I just have to bind the command to an appropriate key
 
-	(define-key *root-map* (kbd "C-p") "cmus")
+``` common-lisp
+(define-key *root-map* (kbd "C-p") "cmus")
+```
 
 This works because I set the title of the terminal when I launch it. cmus changes the title based on what song is playing, so it will not work without doing this.
 

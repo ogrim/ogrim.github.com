@@ -4,7 +4,7 @@
   <title><![CDATA[Ogrim.no]]></title>
   <link href="http://ogrim.no/atom.xml" rel="self"/>
   <link href="http://ogrim.no/"/>
-  <updated>2013-08-18T00:36:26+02:00</updated>
+  <updated>2013-08-18T18:45:55+02:00</updated>
   <id>http://ogrim.no/</id>
   <author>
     <name><![CDATA[Aleksander Skj&aelig;veland Larsen]]></name>
@@ -20,7 +20,9 @@
     <id>http://ogrim.no/2013/01/format-double-density-floppy-on-windows</id>
     <content type="html"><![CDATA[<p>Since I always forget, this is the command for formatting double density floppy disks on Windows:</p>
 
-<pre class="brush: bash; title: ; notranslate" title="">format A: /T:80 /N:9</pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bat'><span class='line'>format A: <span class="n">/T:80</span> <span class="n">/N:9</span>
+</span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
   </entry>
@@ -34,9 +36,12 @@
 
 <p>Stick the following in a file:</p>
 
-<pre><code>#!/bin/sh
-spotify -u $@
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/sh</span>
+</span><span class='line'>spotify -u <span class="nv">$@</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Make it executable with <code>chmod +x</code></p>
 
@@ -53,20 +58,34 @@ spotify -u $@
 
 <p>I put this into a file:</p>
 
-<pre><code>#!/bin/bash
-shopt -s globstar nullglob
-while set -- **/*.zip; [ $# -ge 1 ]
-do
-    for z
-    do
-        ( cd -- "$(dirname "$z")" &amp;&amp;
-            z=${z##*/} &amp;&amp;
-            unzip -- "$z" &amp;&amp;
-            rm -- "$z"
-        )
-    done
-done
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'><span class="nb">shopt</span> -s globstar nullglob
+</span><span class='line'><span class="k">while </span><span class="nb">set</span> -- **/*.zip; <span class="o">[</span> <span class="nv">$# </span>-ge 1 <span class="o">]</span>
+</span><span class='line'><span class="k">do</span>
+</span><span class='line'><span class="k">    for </span>z
+</span><span class='line'>    <span class="k">do</span>
+</span><span class='line'>        <span class="o">(</span> <span class="nb">cd</span> -- <span class="s2">&quot;$(dirname &quot;</span><span class="nv">$z</span><span class="s2">&quot;)&quot;</span> <span class="o">&amp;&amp;</span>
+</span><span class='line'>            <span class="nv">z</span><span class="o">=</span><span class="k">${</span><span class="nv">z</span><span class="p">##*/</span><span class="k">}</span> <span class="o">&amp;&amp;</span>
+</span><span class='line'>            unzip -- <span class="s2">&quot;$z&quot;</span> <span class="o">&amp;&amp;</span>
+</span><span class='line'>            rm -- <span class="s2">&quot;$z&quot;</span>
+</span><span class='line'>        <span class="o">)</span>
+</span><span class='line'>    <span class="k">done</span>
+</span><span class='line'><span class="k">done</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>then made it executable with <code>chmod +x</code> and stuck it on my path. Now I can easily unzip all the archive files recursively, from the folder where I call the script.</p>
 ]]></content>
@@ -79,18 +98,24 @@ done
     <id>http://ogrim.no/2011/08/e-mu-1820-in-debian</id>
     <content type="html"><![CDATA[<p>As I recently installed Debian on my main workstation, I wanted to make my beloved E-MU 1820 sound card work. The audio quality is much better than the integrated sound card on the motherboard, probably because of better digital-analog converters and more power to drive my headphones. The sound card did not work out of the box, so I had to start poking for data. We can get useful hardware information using lspci.</p>
 
-<pre><code>lspci -nn
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>lspci -nn
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>This gave a lot of output, so I used grep to find my sound card.</p>
 
-<pre><code>lspci -nn | grep Creative&lt;/pre&gt;
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>lspci -nn | grep Creative
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>gave the following:</p>
 
-<pre><code>01:09.0 Multimedia audio controller [0401]: Creative Labs SB Audigy [1102:0004] (rev 03)
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>01:09.0 Multimedia audio controller <span class="o">[</span>0401<span class="o">]</span>: Creative Labs SB Audigy <span class="o">[</span>1102:0004<span class="o">]</span> <span class="o">(</span>rev 03<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Notice the <code>1102:0004</code>, which is the <code>PCI id</code>. Next I looked it up in Debians device database: <a href="http://wiki.debian.org/DeviceDatabase/PCI">http://wiki.debian.org/DeviceDatabase/PCI</a> Strangely it did not match completely, closest find in the database was <code>1102:7004</code>. The output led me to search for <code>debian 1102:0004</code>, which gave just what I needed: a handy guide to compile and install the driver from scratch. Follow the guide and be on your way: <a href="http://wiki.debian.org/snd-emu10k1">http://wiki.debian.org/snd-emu10k1</a> When using sudo, I have to qualify modprobe to <code>/sbin/modprobe</code>. If you are elevated by <code>su</code>, you can call modprobe directly.</p>
 
@@ -98,18 +123,24 @@ done
 
 <p>List your sound cards with:</p>
 
-<pre><code>cat /proc/asound/modules
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>cat /proc/asound/modules
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Append <code>alsa.conf</code> or <code>alsa-base.conf</code> with:</p>
 
-<pre><code>options snd_emu10k1=0
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>options <span class="nv">snd_emu10k1</span><span class="o">=</span>0
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>After rebooting the system, the clock rate had reset from <code>44.1Khz</code> to <code>48Khz</code>. This made the sound distorted. To fix it, set the clock rate with the following command:</p>
 
-<pre><code>amixer -c 1 set 'Clock Internal Rate' 44100
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>amixer -c 1 <span class="nb">set</span> <span class="s1">&#39;Clock Internal Rate&#39;</span> 44100
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Notice that <code>-c 1</code> corresponds to the sound card from <code>/proc/asound/modules</code>. Just add this command to <code>/etc/rc.local</code> to run it upon login. You must add the command before the <code>exit 0</code>, as that must be the last command in the file. This will ensure that the clock rate is set to <code>44.1Khz</code> every time you log in.</p>
 
@@ -119,15 +150,24 @@ done
 
 <p>Using emutrix, I poked around a bit to fix output to my loudspeakers. Only headphones was working previously. Thanks to emutrix, it was very fast and simple to determine the routing, before writing the commands. I now have this in my <code>rc.local</code> as well:</p>
 
-<pre><code>amixer -c 1 sset 'Dock DAC1 Left' 'DSP 0'
-amixer -c 1 sset 'Dock DAC1 Right' 'DSP 1'
-amixer -c 1 sset 'Dock DAC2 Left' 'DSP 0'
-amixer -c 1 sset 'Dock DAC2 Right' 'DSP 1'
-amixer -c 1 sset 'Dock DAC3 Left' 'DSP 0'
-amixer -c 1 sset 'Dock DAC3 Right' 'DSP 1'
-amixer -c 1 sset 'Dock DAC4 Left' 'DSP 0'
-amixer -c 1 sset 'Dock DAC4 Right' 'DSP 1'
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>amixer -c 1 sset <span class="s1">&#39;Dock DAC1 Left&#39;</span> <span class="s1">&#39;DSP 0&#39;</span>
+</span><span class='line'>amixer -c 1 sset <span class="s1">&#39;Dock DAC1 Right&#39;</span> <span class="s1">&#39;DSP 1&#39;</span>
+</span><span class='line'>amixer -c 1 sset <span class="s1">&#39;Dock DAC2 Left&#39;</span> <span class="s1">&#39;DSP 0&#39;</span>
+</span><span class='line'>amixer -c 1 sset <span class="s1">&#39;Dock DAC2 Right&#39;</span> <span class="s1">&#39;DSP 1&#39;</span>
+</span><span class='line'>amixer -c 1 sset <span class="s1">&#39;Dock DAC3 Left&#39;</span> <span class="s1">&#39;DSP 0&#39;</span>
+</span><span class='line'>amixer -c 1 sset <span class="s1">&#39;Dock DAC3 Right&#39;</span> <span class="s1">&#39;DSP 1&#39;</span>
+</span><span class='line'>amixer -c 1 sset <span class="s1">&#39;Dock DAC4 Left&#39;</span> <span class="s1">&#39;DSP 0&#39;</span>
+</span><span class='line'>amixer -c 1 sset <span class="s1">&#39;Dock DAC4 Right&#39;</span> <span class="s1">&#39;DSP 1&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 ]]></content>
   </entry>
   
@@ -138,10 +178,14 @@ amixer -c 1 sset 'Dock DAC4 Right' 'DSP 1'
     <id>http://ogrim.no/2011/06/keepass-and-ubuntu</id>
     <content type="html"><![CDATA[<p>Regarding my last recommendation for Ubuntu and Keepass, there is now a much simpler option: a <code>ppa-repository</code>. Installation now only requires 3 commands, and no fiddling with setting up a script to launch the .exe-file with mono.</p>
 
-<pre><code>sudo apt-add-repository ppa:jtaylor/keepass
-sudo apt-get update
-sudo apt-get install keepass2
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-add-repository ppa:jtaylor/keepass
+</span><span class='line'>sudo apt-get update
+</span><span class='line'>sudo apt-get install keepass2
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p><code>Alt+F2</code>, <code>keepass2</code>, <code>Enter</code>, and be on your way. In my experience, this also much more stable than running Keepass with mono. This is quite old news and more accessible than my last post on the matter, as <a href="http://sourceforge.net/projects/keepass/forums/forum/329220/topic/4503818">this information</a> is linked to from the <a href="http://keepass.info/">main Keepass site</a>.</p>
 ]]></content>
@@ -162,16 +206,23 @@ sudo apt-get install keepass2
 
 <p>I wanted to have a keybinding either bringing cmus in focus, or starting it if it isn&#8217;t running. As cmus is running in a terminal emulator, it wasn&#8217;t straight forward how to achieve this. I am using the Gnome Terminal, so this solution will have to be modified to work with other terminals. Of course, the code is added to the <code>.stumpwm</code> file, but you could also just evaluate it to try it out.</p>
 
-<pre><code>(defcommand cmus () ()&lt;br /&gt;
-  "Run or switch to CMus"&lt;br /&gt;
-  (run-or-raise "gnome-terminal -e cmus -t cmus"&lt;br /&gt;
-(:instance "gnome-terminal" :title "cmus")))
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='common-lisp'><span class='line'><span class="p">(</span><span class="nv">defcommand</span> <span class="nv">cmus</span> <span class="p">()</span> <span class="p">()</span>
+</span><span class='line'>  <span class="s">&quot;Run or switch to CMus&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">run-or-raise</span> <span class="s">&quot;gnome-terminal -e cmus -t cmus&quot;</span>
+</span><span class='line'><span class="p">(</span><span class="ss">:instance</span> <span class="s">&quot;gnome-terminal&quot;</span> <span class="ss">:title</span> <span class="s">&quot;cmus&quot;</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Now I just have to bind the command to an appropriate key</p>
 
-<pre><code>(define-key *root-map* (kbd "C-p") "cmus")
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='common-lisp'><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="vg">*root-map*</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-p&quot;</span><span class="p">)</span> <span class="s">&quot;cmus&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>This works because I set the title of the terminal when I launch it. cmus changes the title based on what song is playing, so it will not work without doing this.</p>
 ]]></content>
@@ -203,93 +254,154 @@ sudo apt-get install keepass2
 
 <p>At least for the N73JF, you need to create two files.</p>
 
-<pre><code>sudo touch /etc/pm/sleep.d/20_custom-ehci_hcd
-sudo touch /etc/pm/sleep.d/20_custom-xhci_hcd
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo touch /etc/pm/sleep.d/20_custom-ehci_hcd
+</span><span class='line'>sudo touch /etc/pm/sleep.d/20_custom-xhci_hcd
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>To open a GUI editor like gedit, with root privileges, you can use the following command:</p>
 
-<pre><code>gksudo gedit
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>gksudo gedit
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Keep in mind this is dangerous if you edit the wrong files, so only open the ones we created with the touch-command. If you want to open the file directly, you can append the path to the filename onto the gedit command like so:</p>
 
-<pre><code>gksudo gedit /etc/pm/sleep.d/20_custom-ehci_hcd
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>gksudo gedit /etc/pm/sleep.d/20_custom-ehci_hcd
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>When you have opened the files in your favorite editor, we need to enter some scripts. In <code>20_custom-ehci-hcd</code> put in:</p>
 
-<pre><code>#!/bin/sh
-# File: "/etc/pm/sleep.d/20_custom-ehci_hcd".
-TMPLIST=/tmp/ehci-dev-list
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/sh</span>
+</span><span class='line'><span class="c"># File: &quot;/etc/pm/sleep.d/20_custom-ehci_hcd&quot;.</span>
+</span><span class='line'><span class="nv">TMPLIST</span><span class="o">=</span>/tmp/ehci-dev-list
+</span><span class='line'>
+</span><span class='line'><span class="k">case</span> <span class="s2">&quot;${1}&quot;</span> in
+</span><span class='line'>        hibernate|suspend<span class="o">)</span>
+</span><span class='line'>    <span class="nb">echo</span> -n <span class="s1">&#39;&#39;</span> &amp;gt; <span class="nv">$TMPLIST</span>
+</span><span class='line'>          <span class="k">for </span>i in <span class="sb">`</span>ls /sys/bus/pci/drivers/ehci_hcd/ | egrep <span class="s1">&#39;[0-9a-z]+\:[0-9a-z]+\:.*$&#39;</span><span class="sb">`</span>; <span class="k">do</span>
+</span><span class='line'>              <span class="c"># Unbind ehci_hcd for first device XXXX:XX:XX.X:</span>
+</span><span class='line'>               <span class="nb">echo</span> -n <span class="s2">&quot;$i&quot;</span> | tee /sys/bus/pci/drivers/ehci_hcd/unbind
+</span><span class='line'>           <span class="nb">echo</span> <span class="s2">&quot;$i&quot;</span> &amp;gt;&amp;gt; <span class="nv">$TMPLIST</span>
+</span><span class='line'>          <span class="k">done</span>
+</span><span class='line'>        ;;
+</span><span class='line'>        resume|thaw<span class="o">)</span>
+</span><span class='line'>    <span class="k">for </span>i in <span class="sb">`</span>cat <span class="nv">$TMPLIST</span><span class="sb">`</span>; <span class="k">do</span>
+</span><span class='line'>              <span class="c"># Bind ehci_hcd for first device XXXX:XX:XX.X:</span>
+</span><span class='line'>              <span class="nb">echo</span> -n <span class="s2">&quot;$i&quot;</span> | tee /sys/bus/pci/drivers/ehci_hcd/bind
+</span><span class='line'>    <span class="k">done</span>
+</span><span class='line'><span class="k">    </span>rm <span class="nv">$TMPLIST</span>
+</span><span class='line'>        ;;
+</span><span class='line'><span class="k">esac</span>
+</span></code></pre></td></tr></table></div></figure>
 
-case "${1}" in
-        hibernate|suspend)
-    echo -n '' &amp;gt; $TMPLIST
-          for i in `ls /sys/bus/pci/drivers/ehci_hcd/ | egrep '[0-9a-z]+\:[0-9a-z]+\:.*$'`; do
-              # Unbind ehci_hcd for first device XXXX:XX:XX.X:
-               echo -n "$i" | tee /sys/bus/pci/drivers/ehci_hcd/unbind
-           echo "$i" &amp;gt;&amp;gt; $TMPLIST
-          done
-        ;;
-        resume|thaw)
-    for i in `cat $TMPLIST`; do
-              # Bind ehci_hcd for first device XXXX:XX:XX.X:
-              echo -n "$i" | tee /sys/bus/pci/drivers/ehci_hcd/bind
-    done
-    rm $TMPLIST
-        ;;
-esac
-</code></pre>
 
 <p>In <code>20\_custom-xhci\_hcd</code> put in:</p>
 
-<pre><code>#!/bin/sh
-# File: "/etc/pm/sleep.d/20_custom-xhci_hcd".
-TMPLIST=/tmp/xhci-dev-list
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/sh</span>
+</span><span class='line'><span class="c"># File: &quot;/etc/pm/sleep.d/20_custom-xhci_hcd&quot;.</span>
+</span><span class='line'><span class="nv">TMPLIST</span><span class="o">=</span>/tmp/xhci-dev-list
+</span><span class='line'>
+</span><span class='line'><span class="k">case</span> <span class="s2">&quot;${1}&quot;</span> in
+</span><span class='line'>        hibernate|suspend<span class="o">)</span>
+</span><span class='line'>    <span class="nb">echo</span> -n <span class="s1">&#39;&#39;</span> &amp;gt; <span class="nv">$TMPLIST</span>
+</span><span class='line'>          <span class="k">for </span>i in <span class="sb">`</span>ls /sys/bus/pci/drivers/xhci_hcd/ | egrep <span class="s1">&#39;[0-9a-z]+\:[0-9a-z]+\:.*$&#39;</span><span class="sb">`</span>; <span class="k">do</span>
+</span><span class='line'>              <span class="c"># Unbind ehci_hcd for first device XXXX:XX:XX.X:</span>
+</span><span class='line'>               <span class="nb">echo</span> -n <span class="s2">&quot;$i&quot;</span> | tee /sys/bus/pci/drivers/xhci_hcd/unbind
+</span><span class='line'>           <span class="nb">echo</span> <span class="s2">&quot;$i&quot;</span> &amp;gt;&amp;gt; <span class="nv">$TMPLIST</span>
+</span><span class='line'>          <span class="k">done</span>
+</span><span class='line'>        ;;
+</span><span class='line'>        resume|thaw<span class="o">)</span>
+</span><span class='line'>    <span class="k">for </span>i in <span class="sb">`</span>cat <span class="nv">$TMPLIST</span><span class="sb">`</span>; <span class="k">do</span>
+</span><span class='line'>              <span class="c"># Bind ehci_hcd for first device XXXX:XX:XX.X:</span>
+</span><span class='line'>              <span class="nb">echo</span> -n <span class="s2">&quot;$i&quot;</span> | tee /sys/bus/pci/drivers/xhci_hcd/bind
+</span><span class='line'>    <span class="k">done</span>
+</span><span class='line'><span class="k">    </span>rm <span class="nv">$TMPLIST</span>
+</span><span class='line'>        ;;
+</span><span class='line'><span class="k">esac</span>
+</span></code></pre></td></tr></table></div></figure>
 
-case "${1}" in
-        hibernate|suspend)
-    echo -n '' &amp;gt; $TMPLIST
-          for i in `ls /sys/bus/pci/drivers/xhci_hcd/ | egrep '[0-9a-z]+\:[0-9a-z]+\:.*$'`; do
-              # Unbind ehci_hcd for first device XXXX:XX:XX.X:
-               echo -n "$i" | tee /sys/bus/pci/drivers/xhci_hcd/unbind
-           echo "$i" &amp;gt;&amp;gt; $TMPLIST
-          done
-        ;;
-        resume|thaw)
-    for i in `cat $TMPLIST`; do
-              # Bind ehci_hcd for first device XXXX:XX:XX.X:
-              echo -n "$i" | tee /sys/bus/pci/drivers/xhci_hcd/bind
-    done
-    rm $TMPLIST
-        ;;
-esac
-</code></pre>
 
 <p>Now you must make these files executable with these two commands:</p>
 
-<pre><code>chmod +x /etc/pm/sleep.d/20_custom-ehci_hcd
-chmod +x /etc/pm/sleep.d/20_custom-xhci_hcd
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>chmod +x /etc/pm/sleep.d/20_custom-ehci_hcd
+</span><span class='line'>chmod +x /etc/pm/sleep.d/20_custom-xhci_hcd
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>A user on the forum reported he didn&#8217;t need the extra file as proposed in the first solution. I did not test without this file, as it wasn&#8217;t working until I added the xhci-related file. I suggest you try the steps outlined here first, and attempt these last steps only if it doesn&#8217;t work.</p>
 
 <p>Make this file:</p>
 
-<pre><code>sudo touch /etc/pm/config.d/usb3-suspend-workaround
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo touch /etc/pm/config.d/usb3-suspend-workaround
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Open the file, and put this in:</p>
 
-<pre><code>#File: "/etc/pm/config.d/usb3-suspend-workaround".
-SUSPEND_MODULES="xhci"
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#File: &quot;/etc/pm/config.d/usb3-suspend-workaround&quot;.</span>
+</span><span class='line'><span class="nv">SUSPEND_MODULES</span><span class="o">=</span><span class="s2">&quot;xhci&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>He didn&#8217;t say if it needs to be executable, I&#8217;m assuming it should and that it couldn&#8217;t hurt:</p>
 
-<pre><code>chmod +x /etc/pm/config.d/usb3-suspend-workaround
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>chmod +x /etc/pm/config.d/usb3-suspend-workaround
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>I hope you get it working. You should also check out <a href="http://ubuntuforums.org/showthread.php?t=1444822">the source for this post</a>, as pointed out earlier. The forum might contain new information, after this is published.</p>
 ]]></content>
@@ -304,8 +416,10 @@ SUSPEND_MODULES="xhci"
 
 <p>Run this command in the terminal:</p>
 
-<pre><code>sudo apt-get install libmono-winforms2.0-cil libmono-system-runtime2.0-cil
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install libmono-winforms2.0-cil libmono-system-runtime2.0-cil
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Earlier you only needed to install the winforms package to run KeePass, but with Ubuntu 10.10 it seems you need the system-runtime as well.</p>
 ]]></content>

@@ -97,20 +97,34 @@
 
 <p>I put this into a file:</p>
 
-<pre><code>#!/bin/bash
-shopt -s globstar nullglob
-while set -- **/*.zip; [ $# -ge 1 ]
-do
-    for z
-    do
-        ( cd -- "$(dirname "$z")" &amp;&amp;
-            z=${z##*/} &amp;&amp;
-            unzip -- "$z" &amp;&amp;
-            rm -- "$z"
-        )
-    done
-done
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'><span class="nb">shopt</span> -s globstar nullglob
+</span><span class='line'><span class="k">while </span><span class="nb">set</span> -- **/*.zip; <span class="o">[</span> <span class="nv">$# </span>-ge 1 <span class="o">]</span>
+</span><span class='line'><span class="k">do</span>
+</span><span class='line'><span class="k">    for </span>z
+</span><span class='line'>    <span class="k">do</span>
+</span><span class='line'>        <span class="o">(</span> <span class="nb">cd</span> -- <span class="s2">&quot;$(dirname &quot;</span><span class="nv">$z</span><span class="s2">&quot;)&quot;</span> <span class="o">&amp;&amp;</span>
+</span><span class='line'>            <span class="nv">z</span><span class="o">=</span><span class="k">${</span><span class="nv">z</span><span class="p">##*/</span><span class="k">}</span> <span class="o">&amp;&amp;</span>
+</span><span class='line'>            unzip -- <span class="s2">&quot;$z&quot;</span> <span class="o">&amp;&amp;</span>
+</span><span class='line'>            rm -- <span class="s2">&quot;$z&quot;</span>
+</span><span class='line'>        <span class="o">)</span>
+</span><span class='line'>    <span class="k">done</span>
+</span><span class='line'><span class="k">done</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>then made it executable with <code>chmod +x</code> and stuck it on my path. Now I can easily unzip all the archive files recursively, from the folder where I call the script.</p>
 </div>
@@ -158,6 +172,12 @@ done
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -241,7 +261,10 @@ done
       var disqus_shortname = 'ogrim';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://ogrim.no/2011/10/recursive-unzip-in-bash/';
+        var disqus_url = 'http://ogrim.no/2011/10/recursive-unzip-in-bash/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

@@ -3,13 +3,16 @@ title: Opening Spotify URIs in Spotify Linux Preview from Opera
 author: ogrim
 layout: post
 permalink: /2011/11/spotify-uri-linux/
+comments: true
 ---
 Using Spotify Linux Preview, I want to open URIs to songs and playlist from Opera. This was not working, so here is how you fix it:
 
 Stick the following in a file:
 
-    #!/bin/sh
-    spotify -u $@
+``` bash
+#!/bin/sh
+spotify -u $@
+```
 
 Make it executable with `chmod +x`
 

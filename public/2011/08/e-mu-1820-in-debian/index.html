@@ -95,18 +95,24 @@
 
 <div class="entry-content"><p>As I recently installed Debian on my main workstation, I wanted to make my beloved E-MU 1820 sound card work. The audio quality is much better than the integrated sound card on the motherboard, probably because of better digital-analog converters and more power to drive my headphones. The sound card did not work out of the box, so I had to start poking for data. We can get useful hardware information using lspci.</p>
 
-<pre><code>lspci -nn
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>lspci -nn
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>This gave a lot of output, so I used grep to find my sound card.</p>
 
-<pre><code>lspci -nn | grep Creative&lt;/pre&gt;
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>lspci -nn | grep Creative
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>gave the following:</p>
 
-<pre><code>01:09.0 Multimedia audio controller [0401]: Creative Labs SB Audigy [1102:0004] (rev 03)
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>01:09.0 Multimedia audio controller <span class="o">[</span>0401<span class="o">]</span>: Creative Labs SB Audigy <span class="o">[</span>1102:0004<span class="o">]</span> <span class="o">(</span>rev 03<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Notice the <code>1102:0004</code>, which is the <code>PCI id</code>. Next I looked it up in Debians device database: <a href="http://wiki.debian.org/DeviceDatabase/PCI">http://wiki.debian.org/DeviceDatabase/PCI</a> Strangely it did not match completely, closest find in the database was <code>1102:7004</code>. The output led me to search for <code>debian 1102:0004</code>, which gave just what I needed: a handy guide to compile and install the driver from scratch. Follow the guide and be on your way: <a href="http://wiki.debian.org/snd-emu10k1">http://wiki.debian.org/snd-emu10k1</a> When using sudo, I have to qualify modprobe to <code>/sbin/modprobe</code>. If you are elevated by <code>su</code>, you can call modprobe directly.</p>
 
@@ -114,18 +120,24 @@
 
 <p>List your sound cards with:</p>
 
-<pre><code>cat /proc/asound/modules
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>cat /proc/asound/modules
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Append <code>alsa.conf</code> or <code>alsa-base.conf</code> with:</p>
 
-<pre><code>options snd_emu10k1=0
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>options <span class="nv">snd_emu10k1</span><span class="o">=</span>0
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>After rebooting the system, the clock rate had reset from <code>44.1Khz</code> to <code>48Khz</code>. This made the sound distorted. To fix it, set the clock rate with the following command:</p>
 
-<pre><code>amixer -c 1 set 'Clock Internal Rate' 44100
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>amixer -c 1 <span class="nb">set</span> <span class="s1">&#39;Clock Internal Rate&#39;</span> 44100
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Notice that <code>-c 1</code> corresponds to the sound card from <code>/proc/asound/modules</code>. Just add this command to <code>/etc/rc.local</code> to run it upon login. You must add the command before the <code>exit 0</code>, as that must be the last command in the file. This will ensure that the clock rate is set to <code>44.1Khz</code> every time you log in.</p>
 
@@ -135,15 +147,24 @@
 
 <p>Using emutrix, I poked around a bit to fix output to my loudspeakers. Only headphones was working previously. Thanks to emutrix, it was very fast and simple to determine the routing, before writing the commands. I now have this in my <code>rc.local</code> as well:</p>
 
-<pre><code>amixer -c 1 sset 'Dock DAC1 Left' 'DSP 0'
-amixer -c 1 sset 'Dock DAC1 Right' 'DSP 1'
-amixer -c 1 sset 'Dock DAC2 Left' 'DSP 0'
-amixer -c 1 sset 'Dock DAC2 Right' 'DSP 1'
-amixer -c 1 sset 'Dock DAC3 Left' 'DSP 0'
-amixer -c 1 sset 'Dock DAC3 Right' 'DSP 1'
-amixer -c 1 sset 'Dock DAC4 Left' 'DSP 0'
-amixer -c 1 sset 'Dock DAC4 Right' 'DSP 1'
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>amixer -c 1 sset <span class="s1">&#39;Dock DAC1 Left&#39;</span> <span class="s1">&#39;DSP 0&#39;</span>
+</span><span class='line'>amixer -c 1 sset <span class="s1">&#39;Dock DAC1 Right&#39;</span> <span class="s1">&#39;DSP 1&#39;</span>
+</span><span class='line'>amixer -c 1 sset <span class="s1">&#39;Dock DAC2 Left&#39;</span> <span class="s1">&#39;DSP 0&#39;</span>
+</span><span class='line'>amixer -c 1 sset <span class="s1">&#39;Dock DAC2 Right&#39;</span> <span class="s1">&#39;DSP 1&#39;</span>
+</span><span class='line'>amixer -c 1 sset <span class="s1">&#39;Dock DAC3 Left&#39;</span> <span class="s1">&#39;DSP 0&#39;</span>
+</span><span class='line'>amixer -c 1 sset <span class="s1">&#39;Dock DAC3 Right&#39;</span> <span class="s1">&#39;DSP 1&#39;</span>
+</span><span class='line'>amixer -c 1 sset <span class="s1">&#39;Dock DAC4 Left&#39;</span> <span class="s1">&#39;DSP 0&#39;</span>
+</span><span class='line'>amixer -c 1 sset <span class="s1">&#39;Dock DAC4 Right&#39;</span> <span class="s1">&#39;DSP 1&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 
@@ -189,6 +210,12 @@ amixer -c 1 sset 'Dock DAC4 Right' 'DSP 1'
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -272,7 +299,10 @@ amixer -c 1 sset 'Dock DAC4 Right' 'DSP 1'
       var disqus_shortname = 'ogrim';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://ogrim.no/2011/08/e-mu-1820-in-debian/';
+        var disqus_url = 'http://ogrim.no/2011/08/e-mu-1820-in-debian/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

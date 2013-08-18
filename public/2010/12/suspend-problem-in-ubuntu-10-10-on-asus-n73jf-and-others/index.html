@@ -103,93 +103,154 @@
 
 <p>At least for the N73JF, you need to create two files.</p>
 
-<pre><code>sudo touch /etc/pm/sleep.d/20_custom-ehci_hcd
-sudo touch /etc/pm/sleep.d/20_custom-xhci_hcd
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo touch /etc/pm/sleep.d/20_custom-ehci_hcd
+</span><span class='line'>sudo touch /etc/pm/sleep.d/20_custom-xhci_hcd
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>To open a GUI editor like gedit, with root privileges, you can use the following command:</p>
 
-<pre><code>gksudo gedit
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>gksudo gedit
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Keep in mind this is dangerous if you edit the wrong files, so only open the ones we created with the touch-command. If you want to open the file directly, you can append the path to the filename onto the gedit command like so:</p>
 
-<pre><code>gksudo gedit /etc/pm/sleep.d/20_custom-ehci_hcd
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>gksudo gedit /etc/pm/sleep.d/20_custom-ehci_hcd
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>When you have opened the files in your favorite editor, we need to enter some scripts. In <code>20_custom-ehci-hcd</code> put in:</p>
 
-<pre><code>#!/bin/sh
-# File: "/etc/pm/sleep.d/20_custom-ehci_hcd".
-TMPLIST=/tmp/ehci-dev-list
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/sh</span>
+</span><span class='line'><span class="c"># File: &quot;/etc/pm/sleep.d/20_custom-ehci_hcd&quot;.</span>
+</span><span class='line'><span class="nv">TMPLIST</span><span class="o">=</span>/tmp/ehci-dev-list
+</span><span class='line'>
+</span><span class='line'><span class="k">case</span> <span class="s2">&quot;${1}&quot;</span> in
+</span><span class='line'>        hibernate|suspend<span class="o">)</span>
+</span><span class='line'>    <span class="nb">echo</span> -n <span class="s1">&#39;&#39;</span> &amp;gt; <span class="nv">$TMPLIST</span>
+</span><span class='line'>          <span class="k">for </span>i in <span class="sb">`</span>ls /sys/bus/pci/drivers/ehci_hcd/ | egrep <span class="s1">&#39;[0-9a-z]+\:[0-9a-z]+\:.*$&#39;</span><span class="sb">`</span>; <span class="k">do</span>
+</span><span class='line'>              <span class="c"># Unbind ehci_hcd for first device XXXX:XX:XX.X:</span>
+</span><span class='line'>               <span class="nb">echo</span> -n <span class="s2">&quot;$i&quot;</span> | tee /sys/bus/pci/drivers/ehci_hcd/unbind
+</span><span class='line'>           <span class="nb">echo</span> <span class="s2">&quot;$i&quot;</span> &amp;gt;&amp;gt; <span class="nv">$TMPLIST</span>
+</span><span class='line'>          <span class="k">done</span>
+</span><span class='line'>        ;;
+</span><span class='line'>        resume|thaw<span class="o">)</span>
+</span><span class='line'>    <span class="k">for </span>i in <span class="sb">`</span>cat <span class="nv">$TMPLIST</span><span class="sb">`</span>; <span class="k">do</span>
+</span><span class='line'>              <span class="c"># Bind ehci_hcd for first device XXXX:XX:XX.X:</span>
+</span><span class='line'>              <span class="nb">echo</span> -n <span class="s2">&quot;$i&quot;</span> | tee /sys/bus/pci/drivers/ehci_hcd/bind
+</span><span class='line'>    <span class="k">done</span>
+</span><span class='line'><span class="k">    </span>rm <span class="nv">$TMPLIST</span>
+</span><span class='line'>        ;;
+</span><span class='line'><span class="k">esac</span>
+</span></code></pre></td></tr></table></div></figure>
 
-case "${1}" in
-        hibernate|suspend)
-    echo -n '' &amp;gt; $TMPLIST
-          for i in `ls /sys/bus/pci/drivers/ehci_hcd/ | egrep '[0-9a-z]+\:[0-9a-z]+\:.*$'`; do
-              # Unbind ehci_hcd for first device XXXX:XX:XX.X:
-               echo -n "$i" | tee /sys/bus/pci/drivers/ehci_hcd/unbind
-           echo "$i" &amp;gt;&amp;gt; $TMPLIST
-          done
-        ;;
-        resume|thaw)
-    for i in `cat $TMPLIST`; do
-              # Bind ehci_hcd for first device XXXX:XX:XX.X:
-              echo -n "$i" | tee /sys/bus/pci/drivers/ehci_hcd/bind
-    done
-    rm $TMPLIST
-        ;;
-esac
-</code></pre>
 
 <p>In <code>20\_custom-xhci\_hcd</code> put in:</p>
 
-<pre><code>#!/bin/sh
-# File: "/etc/pm/sleep.d/20_custom-xhci_hcd".
-TMPLIST=/tmp/xhci-dev-list
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/sh</span>
+</span><span class='line'><span class="c"># File: &quot;/etc/pm/sleep.d/20_custom-xhci_hcd&quot;.</span>
+</span><span class='line'><span class="nv">TMPLIST</span><span class="o">=</span>/tmp/xhci-dev-list
+</span><span class='line'>
+</span><span class='line'><span class="k">case</span> <span class="s2">&quot;${1}&quot;</span> in
+</span><span class='line'>        hibernate|suspend<span class="o">)</span>
+</span><span class='line'>    <span class="nb">echo</span> -n <span class="s1">&#39;&#39;</span> &amp;gt; <span class="nv">$TMPLIST</span>
+</span><span class='line'>          <span class="k">for </span>i in <span class="sb">`</span>ls /sys/bus/pci/drivers/xhci_hcd/ | egrep <span class="s1">&#39;[0-9a-z]+\:[0-9a-z]+\:.*$&#39;</span><span class="sb">`</span>; <span class="k">do</span>
+</span><span class='line'>              <span class="c"># Unbind ehci_hcd for first device XXXX:XX:XX.X:</span>
+</span><span class='line'>               <span class="nb">echo</span> -n <span class="s2">&quot;$i&quot;</span> | tee /sys/bus/pci/drivers/xhci_hcd/unbind
+</span><span class='line'>           <span class="nb">echo</span> <span class="s2">&quot;$i&quot;</span> &amp;gt;&amp;gt; <span class="nv">$TMPLIST</span>
+</span><span class='line'>          <span class="k">done</span>
+</span><span class='line'>        ;;
+</span><span class='line'>        resume|thaw<span class="o">)</span>
+</span><span class='line'>    <span class="k">for </span>i in <span class="sb">`</span>cat <span class="nv">$TMPLIST</span><span class="sb">`</span>; <span class="k">do</span>
+</span><span class='line'>              <span class="c"># Bind ehci_hcd for first device XXXX:XX:XX.X:</span>
+</span><span class='line'>              <span class="nb">echo</span> -n <span class="s2">&quot;$i&quot;</span> | tee /sys/bus/pci/drivers/xhci_hcd/bind
+</span><span class='line'>    <span class="k">done</span>
+</span><span class='line'><span class="k">    </span>rm <span class="nv">$TMPLIST</span>
+</span><span class='line'>        ;;
+</span><span class='line'><span class="k">esac</span>
+</span></code></pre></td></tr></table></div></figure>
 
-case "${1}" in
-        hibernate|suspend)
-    echo -n '' &amp;gt; $TMPLIST
-          for i in `ls /sys/bus/pci/drivers/xhci_hcd/ | egrep '[0-9a-z]+\:[0-9a-z]+\:.*$'`; do
-              # Unbind ehci_hcd for first device XXXX:XX:XX.X:
-               echo -n "$i" | tee /sys/bus/pci/drivers/xhci_hcd/unbind
-           echo "$i" &amp;gt;&amp;gt; $TMPLIST
-          done
-        ;;
-        resume|thaw)
-    for i in `cat $TMPLIST`; do
-              # Bind ehci_hcd for first device XXXX:XX:XX.X:
-              echo -n "$i" | tee /sys/bus/pci/drivers/xhci_hcd/bind
-    done
-    rm $TMPLIST
-        ;;
-esac
-</code></pre>
 
 <p>Now you must make these files executable with these two commands:</p>
 
-<pre><code>chmod +x /etc/pm/sleep.d/20_custom-ehci_hcd
-chmod +x /etc/pm/sleep.d/20_custom-xhci_hcd
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>chmod +x /etc/pm/sleep.d/20_custom-ehci_hcd
+</span><span class='line'>chmod +x /etc/pm/sleep.d/20_custom-xhci_hcd
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>A user on the forum reported he didn&#8217;t need the extra file as proposed in the first solution. I did not test without this file, as it wasn&#8217;t working until I added the xhci-related file. I suggest you try the steps outlined here first, and attempt these last steps only if it doesn&#8217;t work.</p>
 
 <p>Make this file:</p>
 
-<pre><code>sudo touch /etc/pm/config.d/usb3-suspend-workaround
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo touch /etc/pm/config.d/usb3-suspend-workaround
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Open the file, and put this in:</p>
 
-<pre><code>#File: "/etc/pm/config.d/usb3-suspend-workaround".
-SUSPEND_MODULES="xhci"
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#File: &quot;/etc/pm/config.d/usb3-suspend-workaround&quot;.</span>
+</span><span class='line'><span class="nv">SUSPEND_MODULES</span><span class="o">=</span><span class="s2">&quot;xhci&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>He didn&#8217;t say if it needs to be executable, I&#8217;m assuming it should and that it couldn&#8217;t hurt:</p>
 
-<pre><code>chmod +x /etc/pm/config.d/usb3-suspend-workaround
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>chmod +x /etc/pm/config.d/usb3-suspend-workaround
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>I hope you get it working. You should also check out <a href="http://ubuntuforums.org/showthread.php?t=1444822">the source for this post</a>, as pointed out earlier. The forum might contain new information, after this is published.</p>
 </div>
@@ -237,6 +298,12 @@ SUSPEND_MODULES="xhci"
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -320,7 +387,10 @@ SUSPEND_MODULES="xhci"
       var disqus_shortname = 'ogrim';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://ogrim.no/2010/12/suspend-problem-in-ubuntu-10-10-on-asus-n73jf-and-others/';
+        var disqus_url = 'http://ogrim.no/2010/12/suspend-problem-in-ubuntu-10-10-on-asus-n73jf-and-others/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

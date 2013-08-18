@@ -3,6 +3,7 @@ title: Stop Opera 11 hide URL parameters
 author: ogrim
 layout: post
 permalink: /2010/12/stop-opera-11-hide-url-parameters/
+comments: true
 ---
 I love the new version of the [Opera][1] web browser. If my memory is correct (it sometimes is) I have been using Opera for about 8 years. They do like to change things up, innovate and think differently. This is often for the better, giving us new and exiting features, for instance the [Speed Dial][2]. They changed up a lot of things for version 11, but there is one change I did not like: hiding the URL parameters.
 
